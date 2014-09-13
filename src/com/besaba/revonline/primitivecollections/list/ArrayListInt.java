@@ -9,6 +9,8 @@ import java.util.NoSuchElementException;
 import java.util.RandomAccess;
 
 /**
+ * A List of integers
+ *
  * @author Marco
  * @since 1.0
  */
@@ -16,10 +18,22 @@ public class ArrayListInt implements IntIterable, RandomAccess {
     private transient int[] elementsData;
     private int size;
 
+    /**
+     * Creates an ArrayListInt with the provided capacity.
+     *
+     * @param capacity The start capacity
+     * @return The created ArrayListInt
+     */
     public static ArrayListInt withCapacity(int capacity) {
         return new ArrayListInt(capacity);
     }
 
+    /**
+     * Creates an ArrayListInt taking the values from another ArrayListInt
+     *
+     * @param fromList The original list
+     * @return The ArrayListInt which contains {@see fromList} values
+     */
     public static ArrayListInt from(ArrayListInt fromList) {
         ArrayListInt toList = new ArrayListInt(fromList.size);
 
@@ -49,7 +63,7 @@ public class ArrayListInt implements IntIterable, RandomAccess {
     }
 
     public void add(int value) {
-        ensureCapacity(value);
+        ensureCapacity(size + 1);
 
         elementsData[size++] = value;
     }
@@ -102,7 +116,7 @@ public class ArrayListInt implements IntIterable, RandomAccess {
 
             @Override
             public int next() {
-                if (pointer + 1 >= size) {
+                if (pointer + 1 > size) {
                     throw new NoSuchElementException();
                 }
 

@@ -26,27 +26,31 @@ public class ArrayListIntTest {
 
     @Test
     public void testAdd() throws Exception {
+        ArrayListInt list = ArrayListInt.withCapacity(1);
 
+        for (int i = 0; i < 10; ++i) {
+            list.add(i);
+        }
     }
 
     @Test
     public void testSize() throws Exception {
-
+        assertEquals(10, ArrayListInt.with(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).size());
     }
 
     @Test
     public void testIsEmpty() throws Exception {
-
+        assertTrue(ArrayListInt.with().isEmpty());
     }
 
     @Test
     public void testContains() throws Exception {
-
+        assertTrue(ArrayListInt.with(5, 10, 15, 20, 25, 30, 35, 40, 45, 50).contains(25));
     }
 
     @Test
     public void testIndexOf() throws Exception {
-
+        assertEquals(1, ArrayListInt.with(0, 1).indexOf(1));
     }
 
     @Test
