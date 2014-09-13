@@ -4,7 +4,6 @@ import com.besaba.revonline.primitivecollections.iterables.IntIterable;
 import com.besaba.revonline.primitivecollections.iterables.iterators.IntIterator;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.RandomAccess;
 
@@ -88,7 +87,7 @@ public class ArrayListInt implements IntIterable, RandomAccess {
      * @param value The int to add
      */
     public void add(int index, int value) {
-        rangeCheck(index);
+        rangeCheckAdd(index);
         ensureCapacity(size + 1);
 
         System.arraycopy(   elementsData, index,
@@ -101,7 +100,7 @@ public class ArrayListInt implements IntIterable, RandomAccess {
     }
 
     public int removeAt(int index) {
-        rangeCheck(index);
+        rangeCheckAdd(index);
 
         int from = size - index - 1;
         if (from > 0) {
@@ -112,7 +111,11 @@ public class ArrayListInt implements IntIterable, RandomAccess {
         return elementsData[index];
     }
 
-    private void rangeCheck(int index) {
+    public int get(int index) {
+        return elementsData[index];
+    }
+
+    private void rangeCheckAdd(int index) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException(index + " is not a valid index");
         }
@@ -177,5 +180,29 @@ public class ArrayListInt implements IntIterable, RandomAccess {
 
     public int[] asArray() {
         return elementsData.clone();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+
+        if (obj instanceof ArrayListInt) {
+            ArrayListInt objList = (ArrayListInt) obj;
+
+            return objList.size == this.size && Arrays.equals(objList.elementsData, this.elementsData);
+        }
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(elementsData);
     }
 }

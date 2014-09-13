@@ -80,7 +80,7 @@ public class ArrayListIntTest {
 
     @Test
     public void testEmpty() throws Exception {
-
+        assertTrue(ArrayListInt.empty().isEmpty());
     }
 
     @Test
@@ -94,8 +94,73 @@ public class ArrayListIntTest {
         assertTrue(listInt.isEmpty());
     }
 
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testRemoveWithInvalidIndex() throws Exception {
+        int value = 10;
+
+        ArrayListInt listInt = ArrayListInt.with(value);
+
+        listInt.removeAt(1);
+
+        assertTrue(listInt.isEmpty());
+    }
+
     @Test
     public void testAsArray() throws Exception {
 
+    }
+
+    @Test
+    public void testRemoveAt() throws Exception {
+
+    }
+
+    @Test
+    public void testGet() throws Exception {
+        ArrayListInt list = ArrayListInt.with(1, 2, 3, 4);
+
+        assertEquals(1, list.get(0));
+        assertEquals(2, list.get(1));
+        assertEquals(3, list.get(2));
+        assertEquals(4, list.get(3));
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testGetWithAnInvalidIndex() throws Exception {
+        ArrayListInt list = ArrayListInt.empty();
+
+        assertEquals(1, list.get(0));
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testGetWithNegativeIndex() throws Exception {
+        ArrayListInt list = ArrayListInt.empty();
+
+        assertEquals(1, list.get(-1));
+    }
+
+
+    @Test
+    public void testSizeProperty() throws Exception {
+        ArrayListInt list = ArrayListInt.with(5, 3, 2);
+
+        assertEquals(3, list.size());
+
+        list.add(1);
+
+        assertEquals(4, list.size());
+
+        list.removeAt(0);
+        list.removeAt(1);
+
+        assertEquals(2, list.size());
+
+        list.add(1);
+
+        assertEquals(3, list.size());
+
+        list.add(0, 5);
+
+        assertEquals(4, list.size());
     }
 }
