@@ -4,6 +4,7 @@ import com.besaba.revonline.primitivecollections.iterables.IntIterable;
 import com.besaba.revonline.primitivecollections.iterables.iterators.IntIterator;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.RandomAccess;
 
@@ -32,7 +33,9 @@ public class ArrayListInt implements IntIterable, RandomAccess {
 
     public static ArrayListInt with(int... numbers) {
         ArrayListInt toList = new ArrayListInt(0);
+
         toList.elementsData = numbers;
+        toList.size = numbers.length;
 
         return toList;
     }
