@@ -11,6 +11,7 @@ public class ArrayListIntTest {
     @Test
     public void testWithCapacity() throws Exception {
         int size = 20;
+
         ArrayList<Integer> arrayList = new ArrayList<Integer>(size);
         ArrayListInt arrayListInt = ArrayListInt.withCapacity(size);
 

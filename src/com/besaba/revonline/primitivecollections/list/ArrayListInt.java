@@ -1,6 +1,6 @@
 package com.besaba.revonline.primitivecollections.list;
 
-import com.besaba.revonline.primitivecollections.iterables.iterators.IntIterable;
+import com.besaba.revonline.primitivecollections.iterables.IntIterable;
 import com.besaba.revonline.primitivecollections.iterables.iterators.IntIterator;
 
 import java.util.Arrays;
