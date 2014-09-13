@@ -1,5 +1,6 @@
 package com.besaba.revonline.primitivecollections.list;
 
+import com.besaba.revonline.primitivecollections.iterables.iterators.IntIterator;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -51,5 +52,18 @@ public class ArrayListIntTest {
     @Test
     public void testIterator() throws Exception {
 
+    }
+
+    @Test
+    public void testWith() throws Exception {
+        ArrayListInt list = ArrayListInt.with(1, 2, 3, 4, 5, 6);
+        int[] result = {1, 2, 3, 4, 5, 6};
+
+        int prev = 0;
+        IntIterator iterator = list.iterator();
+
+        while (iterator.hasNext()) {
+            assertEquals(result[prev++], iterator.next());
+        }
     }
 }

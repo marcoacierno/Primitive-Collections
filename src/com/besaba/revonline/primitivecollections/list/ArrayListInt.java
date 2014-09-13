@@ -30,6 +30,13 @@ public class ArrayListInt implements IntIterable, RandomAccess {
         return toList;
     }
 
+    public static ArrayListInt with(int... numbers) {
+        ArrayListInt toList = new ArrayListInt(0);
+        toList.elementsData = numbers;
+
+        return toList;
+    }
+
     private ArrayListInt(int capacity) {
         if (capacity < 0) {
             throw new IllegalArgumentException(capacity + " is not a valid capacity.");
