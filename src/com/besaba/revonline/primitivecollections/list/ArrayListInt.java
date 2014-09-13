@@ -100,7 +100,7 @@ public class ArrayListInt implements IntIterable, RandomAccess {
         size++;
     }
 
-    public int remove(int index) {
+    public int removeAt(int index) {
         rangeCheck(index);
 
         int from = size - index - 1;
