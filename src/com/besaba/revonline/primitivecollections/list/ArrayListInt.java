@@ -15,6 +15,8 @@ import java.util.RandomAccess;
  * @since 1.0
  */
 public class ArrayListInt implements IntIterable, RandomAccess {
+    private static final ArrayListInt EMPTY = new ArrayListInt(0);
+
     private transient int[] elementsData;
     private int size;
 
@@ -45,13 +47,19 @@ public class ArrayListInt implements IntIterable, RandomAccess {
         return toList;
     }
 
-    public static ArrayListInt with(int... numbers) {
+    public static ArrayListInt with(int number, int... numbers) {
         ArrayListInt toList = new ArrayListInt(0);
 
         toList.elementsData = numbers;
         toList.size = numbers.length;
 
+        toList.add(0, number);
+
         return toList;
+    }
+
+    public static ArrayListInt empty() {
+        return EMPTY;
     }
 
     private ArrayListInt(int capacity) {
@@ -62,10 +70,52 @@ public class ArrayListInt implements IntIterable, RandomAccess {
         elementsData = new int[capacity];
     }
 
+    /**
+     * Adds an integer at the end of the list.
+     *
+     * @param value The int to add
+     */
     public void add(int value) {
         ensureCapacity(size + 1);
 
         elementsData[size++] = value;
+    }
+
+    /**
+     * Adds an integer in the position provided in the {@see index}.
+     *
+     * @param index The position
+     * @param value The int to add
+     */
+    public void add(int index, int value) {
+        rangeCheck(index);
+        ensureCapacity(size + 1);
+
+        System.arraycopy(   elementsData, index,
+                            elementsData, index + 1,
+                            size - index
+                        );
+
+        elementsData[index] = value;
+        size++;
+    }
+
+    public int remove(int index) {
+        rangeCheck(index);
+
+        int from = size - index - 1;
+        if (from > 0) {
+            System.arraycopy(elementsData, index + 1, elementsData, index, from);
+        }
+
+        --size;
+        return elementsData[index];
+    }
+
+    private void rangeCheck(int index) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException(index + " is not a valid index");
+        }
     }
 
     private void ensureCapacity(int minCapacity) {
@@ -123,5 +173,9 @@ public class ArrayListInt implements IntIterable, RandomAccess {
                 return elementsData[pointer++];
             }
         };
+    }
+
+    public int[] asArray() {
+        return elementsData.clone();
     }
 }

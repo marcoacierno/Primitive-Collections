@@ -4,6 +4,8 @@ import com.besaba.revonline.primitivecollections.iterables.iterators.IntIterator
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -31,6 +33,8 @@ public class ArrayListIntTest {
         for (int i = 0; i < 10; ++i) {
             list.add(i);
         }
+
+        assertArrayEquals(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}, list.asArray());
     }
 
     @Test
@@ -40,7 +44,12 @@ public class ArrayListIntTest {
 
     @Test
     public void testIsEmpty() throws Exception {
-        assertTrue(ArrayListInt.with().isEmpty());
+        assertTrue(ArrayListInt.withCapacity(0).isEmpty());
+    }
+
+    @Test
+    public void testEmptyAfterRemove() throws Exception {
+        ArrayListInt listInt = ArrayListInt.with(1);
     }
 
     @Test
