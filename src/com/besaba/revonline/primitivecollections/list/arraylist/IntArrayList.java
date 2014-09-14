@@ -79,7 +79,6 @@ public class IntArrayList
         }
 
         elementsData = new int[capacity];
-//        size = capacity;
     }
 
     /**
