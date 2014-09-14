@@ -46,6 +46,14 @@ public class IntArrayList
         return toList;
     }
 
+    /**
+     * Creates an IntArrayList with the values provided as argument
+     *
+     * @param number The list need at least one value to be created,
+     *               {@see empty()} to create an empty list.
+     * @param numbers Other values to insert
+     * @return An IntArrayList with the values provided as arguments
+     */
     public static IntArrayList with(int number, int... numbers) {
         IntArrayList toList = new IntArrayList(0);
 
@@ -57,6 +65,10 @@ public class IntArrayList
         return toList;
     }
 
+    /**
+     * Creates an empty IntArrayList
+     * @return An empty list
+     */
     public static IntArrayList empty() {
         return IntArrayList.withCapacity(0);
     }
@@ -100,6 +112,10 @@ public class IntArrayList
         size++;
     }
 
+    /**
+     * Adds in the List all the values inside {@see fromList}
+     * @param fromList The list which contains the value to add
+     */
     public void addAll(IntArrayList fromList) {
         ensureCapacity(size + fromList.size);
 
@@ -107,6 +123,12 @@ public class IntArrayList
         size += fromList.size;
     }
 
+    /**
+     * Adds all the values of {@see fromList} from the index {@see startIndex}
+     *
+     * @param startIndex The index from where the values should be added
+     * @param fromList The list which contains the value to add
+     */
     public void addAllAt(int startIndex, IntArrayList fromList) {
         rangeCheckAdd(startIndex);
         ensureCapacity(size + fromList.size);
@@ -127,6 +149,12 @@ public class IntArrayList
         size += fromList.size;
     }
 
+    /**
+     * Removes the value at the index provided as argument
+     *
+     * @param index The index to remove
+     * @return The value which was inside the position
+     */
     public int removeAt(int index) {
         rangeCheckAdd(index);
 
@@ -138,11 +166,20 @@ public class IntArrayList
                                 from);
         }
 
+        // instead of make a clean copy of the old array w/o this index
+        // i set it to 0. it could cause bugs.
+        // asArray has been adapted to avoid bugs but remember this fact
         elementsData[--size] = 0;
 
         return elementsData[index];
     }
 
+    /**
+     * Returns the value inside the index passed as argument
+     *
+     * @param index The index to read
+     * @return The value
+     */
     public int get(int index) {
         return elementsData[index];
     }
@@ -167,6 +204,11 @@ public class IntArrayList
         }
     }
 
+    /**
+     * The size of the list
+     *
+     * @return The size of the list
+     */
     public int size() {
         return size;
     }
