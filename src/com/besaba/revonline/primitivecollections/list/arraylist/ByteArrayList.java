@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 import java.util.RandomAccess;
 
 /**
- * A List of integers
+ * A List
  *
  * @author Marco
  * @since 1.0
@@ -82,7 +82,7 @@ public class ByteArrayList
     }
 
     /**
-     * Adds an integer at the end of the list.
+     * Adds at the end of the list.
      *
      * @param value The int to add
      */
@@ -93,7 +93,7 @@ public class ByteArrayList
     }
 
     /**
-     * Adds an integer in the position provided in the {@see index}.
+     * Adds in the position provided in the {@see index}.
      *
      * @param index The position
      * @param value The int to add
