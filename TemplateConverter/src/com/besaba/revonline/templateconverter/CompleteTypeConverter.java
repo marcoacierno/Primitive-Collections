@@ -25,6 +25,7 @@ public class CompleteTypeConverter {
         final String folder = "List";
         final String fileName = "ArrayList";
         final String iteratorsFolder = "Iterators";
+        final String consumerFolder = "Consumer";
         // sources directories
         // yes, you can use relative paths yaaaay!
         final String
@@ -33,6 +34,8 @@ public class CompleteTypeConverter {
                 sourceClassIterable = "D:\\Users\\ReVo\\Documents\\IntelliJ IDEA\\PrimitiveCollections\\src\\com\\besaba\\revonline\\primitivecollections\\iterables";
         final String
                 sourceClassIterator = "D:\\Users\\ReVo\\Documents\\IntelliJ IDEA\\PrimitiveCollections\\src\\com\\besaba\\revonline\\primitivecollections\\iterables\\iterators";
+        final String
+                sourceClassConsumer = "D:\\Users\\ReVo\\Documents\\IntelliJ IDEA\\PrimitiveCollections\\src\\com\\besaba\\revonline\\primitivecollections\\function\\";
         // put it to true if you are recreating everything
         final boolean overrideIfExists = false; //oh and for now it doesn't work (lol it's not implemented yet)
         // types which will be used
@@ -44,6 +47,7 @@ public class CompleteTypeConverter {
             String className = upperCaseType + fileName;
             final String iteratorName = upperCaseType + "Iterator";
             final String iterableName = upperCaseType + "Iterable";
+            final String consumerName = upperCaseType + "Consumer";
 
             Map<String, String> variabili = new HashMap<>();
 
@@ -57,6 +61,7 @@ public class CompleteTypeConverter {
             Path classFile = Paths.get(sourceClassDir, className + ".java");
             Path iteratorFile = Paths.get(sourceClassIterator, iteratorName + ".java");
             Path iterableFile = Paths.get(sourceClassIterable, iterableName + ".java");
+            Path consumerFile = Paths.get(sourceClassConsumer, consumerName + ".java");
 
             Template template = new Template("{{", "}}");
 
@@ -84,7 +89,13 @@ public class CompleteTypeConverter {
                 }
             }
 
-
+            try (BufferedReader source = Files.newBufferedReader(Paths.get(templatesPosition, consumerFolder, "Consumer.txt"), StandardCharsets.UTF_8);
+                 BufferedWriter writer = Files.newBufferedWriter(consumerFile, StandardCharsets.UTF_8)) {
+                for (String line; (line = source.readLine()) != null; ) {
+                    writer.append(template.format(line,variabili))
+                            .append(System.lineSeparator());
+                }
+            }
         }
     }
 }
