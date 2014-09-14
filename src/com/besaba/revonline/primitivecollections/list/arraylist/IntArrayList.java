@@ -112,6 +112,14 @@ public class IntArrayList
         size++;
     }
 
+    public int set(int index, int newValue) {
+        rangeCheckAdd(index);
+
+        int oldValue = elementsData[index];
+        elementsData[index] = newValue;
+        return oldValue;
+    }
+
     /**
      * Adds in the List all the values inside {@see fromList}
      * @param fromList The list which contains the value to add

@@ -376,6 +376,22 @@ public class IntArrayListTest {
         assertEquals(8, IntArrayList.with(1, 9, 3, 4, 9, 6, 7, 8, 9).lastIndexOf(9));
     }
 
+    @Test
+    public void testSet() throws Exception {
+        IntArrayList list = IntArrayList.with(1, 2, 3);
+        list.set(1, 3);
+
+        assertEquals(3, list.get(1));
+    }
+
+    @Test
+    public void testContainsWithValueChangedUsingSet() throws Exception {
+        IntArrayList list = IntArrayList.with(1, 5, 3);
+        list.set(2, 101);
+
+        assertTrue(list.contains(101));
+    }
+
     // ============================================================================================================== //
     // =============================== ArrayList<Integer> IntArrayList tests ======================================== //
     // ============================================================================================================== //
