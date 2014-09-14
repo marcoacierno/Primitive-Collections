@@ -51,7 +51,7 @@ public class CompleteTypeConverter {
         typeAndDefault.put("long", "0");
         typeAndDefault.put("float", "0.0f");
         typeAndDefault.put("double", "0.0d");
-        typeAndDefault.put("char", "'\\u0000'");
+        typeAndDefault.put("char", "'\\\\u0000'");
         typeAndDefault.put("String", "null");
 
 

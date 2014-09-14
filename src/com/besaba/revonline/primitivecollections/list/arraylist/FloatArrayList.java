@@ -176,7 +176,7 @@ public class FloatArrayList
         // instead of make a clean copy of the old array w/o this index
         // i set it to 0. it could cause bugs.
         // asArray has been adapted to avoid bugs but remember this fact
-        elementsData[--size] = 0;
+        elementsData[--size] = 0.0f;
 
         return elementsData[index];
     }
