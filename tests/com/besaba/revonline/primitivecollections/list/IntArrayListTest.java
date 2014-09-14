@@ -64,7 +64,14 @@ public class IntArrayListTest {
 
     @Test
     public void testIterator() throws Exception {
+        IntIterator iterator = IntArrayList.with(1, 2, 3, 4, 5, 6).iterator();
 
+        assertEquals(1, iterator.next());
+        assertEquals(2, iterator.next());
+        assertEquals(3, iterator.next());
+        assertEquals(4, iterator.next());
+        assertEquals(5, iterator.next());
+        assertEquals(6, iterator.next());
     }
 
     @Test
@@ -117,7 +124,11 @@ public class IntArrayListTest {
 
     @Test
     public void testRemoveAt() throws Exception {
+        IntArrayList list = IntArrayList.with(1, 2, 3);
 
+        list.removeAt(1);
+
+        assertArrayEquals(new int[]{1, 3}, list.asArray());
     }
 
     @Test

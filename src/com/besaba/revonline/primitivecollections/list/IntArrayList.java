@@ -131,11 +131,15 @@ public class IntArrayList
         rangeCheckAdd(index);
 
         int from = size - index - 1;
+
         if (from > 0) {
-            System.arraycopy(elementsData, index + 1, elementsData, index, from);
+            System.arraycopy(   elementsData, index + 1,
+                                elementsData, index,
+                                from);
         }
 
-        --size;
+        elementsData[--size] = 0;
+
         return elementsData[index];
     }
 
@@ -207,7 +211,13 @@ public class IntArrayList
     }
 
     public int[] asArray() {
-        return elementsData.clone();
+        int[] array = new int[size];
+
+        System.arraycopy(elementsData, 0,
+                         array, 0,
+                         size);
+
+        return array;
     }
 
     @Override
