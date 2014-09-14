@@ -257,4 +257,26 @@ public class IntArrayListTest {
 
         assertEquals(Arrays.hashCode(arr1), list.hashCode());
     }
+
+    @Test
+    public void testCloneByAddingTwoValuesToTheOriginalList() throws Exception {
+        IntArrayList list1 = IntArrayList.with(1, 2, 3, 4, 5);
+        IntArrayList list2 = list1.clone();
+
+        list1.add(1);
+        list1.add(2);
+
+        assertNotEquals(list1, list2);
+    }
+
+    @Test
+    public void testCloneByAddingTwoValuesToTheClonedList() throws Exception {
+        IntArrayList list1 = IntArrayList.with(1, 2, 3, 4, 5);
+        IntArrayList list2 = list1.clone();
+
+        list2.add(1);
+        list2.add(2);
+
+        assertNotEquals(list1, list2);
+    }
 }
