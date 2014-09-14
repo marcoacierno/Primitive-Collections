@@ -3,6 +3,7 @@ package com.besaba.revonline.primitivecollections.list;
 import com.besaba.revonline.primitivecollections.iterables.IntIterable;
 import com.besaba.revonline.primitivecollections.iterables.iterators.IntIterator;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.RandomAccess;
@@ -13,9 +14,7 @@ import java.util.RandomAccess;
  * @author Marco
  * @since 1.0
  */
-public class ArrayListInt implements IntIterable, RandomAccess {
-    private static final ArrayListInt EMPTY = new ArrayListInt(0);
-
+public class IntArrayList implements IntIterable, RandomAccess {
     private transient int[] elementsData;
     private int size;
 
@@ -25,8 +24,8 @@ public class ArrayListInt implements IntIterable, RandomAccess {
      * @param capacity The start capacity
      * @return The created ArrayListInt
      */
-    public static ArrayListInt withCapacity(int capacity) {
-        return new ArrayListInt(capacity);
+    public static IntArrayList withCapacity(int capacity) {
+        return new IntArrayList(capacity);
     }
 
     /**
@@ -35,8 +34,8 @@ public class ArrayListInt implements IntIterable, RandomAccess {
      * @param fromList The original list
      * @return The ArrayListInt which contains {@see fromList} values
      */
-    public static ArrayListInt from(ArrayListInt fromList) {
-        ArrayListInt toList = new ArrayListInt(fromList.size);
+    public static IntArrayList from(IntArrayList fromList) {
+        IntArrayList toList = new IntArrayList(fromList.size);
 
         IntIterator iterator = fromList.iterator();
         while (iterator.hasNext()) {
@@ -46,8 +45,8 @@ public class ArrayListInt implements IntIterable, RandomAccess {
         return toList;
     }
 
-    public static ArrayListInt with(int number, int... numbers) {
-        ArrayListInt toList = new ArrayListInt(0);
+    public static IntArrayList with(int number, int... numbers) {
+        IntArrayList toList = new IntArrayList(0);
 
         toList.elementsData = numbers;
         toList.size = numbers.length;
@@ -57,16 +56,17 @@ public class ArrayListInt implements IntIterable, RandomAccess {
         return toList;
     }
 
-    public static ArrayListInt empty() {
-        return EMPTY;
+    public static IntArrayList empty() {
+        return IntArrayList.withCapacity(0);
     }
 
-    private ArrayListInt(int capacity) {
+    private IntArrayList(int capacity) {
         if (capacity < 0) {
             throw new IllegalArgumentException(capacity + " is not a valid capacity.");
         }
 
         elementsData = new int[capacity];
+//        size = capacity;
     }
 
     /**
@@ -97,6 +97,33 @@ public class ArrayListInt implements IntIterable, RandomAccess {
 
         elementsData[index] = value;
         size++;
+    }
+
+    public void addAll(IntArrayList fromList) {
+        ensureCapacity(size + fromList.size);
+
+        System.arraycopy(fromList.elementsData, 0, elementsData, size, fromList.size);
+        size += fromList.size;
+    }
+
+    public void addAllAt(int startIndex, IntArrayList fromList) {
+        rangeCheckAdd(startIndex);
+        ensureCapacity(size + fromList.size);
+
+        int numMoved = size - startIndex;
+        if (numMoved > 0) {
+            System.arraycopy( elementsData, startIndex,
+                              elementsData, startIndex + fromList.size,
+                              numMoved
+                            );
+        }
+
+        System.arraycopy(   fromList.elementsData, 0,
+                            elementsData, startIndex,
+                            fromList.size
+                        );
+
+        size += fromList.size;
     }
 
     public int removeAt(int index) {
@@ -192,8 +219,8 @@ public class ArrayListInt implements IntIterable, RandomAccess {
             return false;
         }
 
-        if (obj instanceof ArrayListInt) {
-            ArrayListInt objList = (ArrayListInt) obj;
+        if (obj instanceof IntArrayList) {
+            IntArrayList objList = (IntArrayList) obj;
 
             return objList.size == this.size && Arrays.equals(objList.elementsData, this.elementsData);
         }
@@ -204,5 +231,10 @@ public class ArrayListInt implements IntIterable, RandomAccess {
     @Override
     public int hashCode() {
         return Arrays.hashCode(elementsData);
+    }
+
+    @Override
+    public String toString() {
+        return "Size: " + size + ", Values: " + Arrays.toString(elementsData);
     }
 }
