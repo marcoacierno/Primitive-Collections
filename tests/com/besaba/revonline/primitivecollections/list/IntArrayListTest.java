@@ -290,4 +290,16 @@ public class IntArrayListTest {
 
         assertNotEquals(list1, list2);
     }
+
+    @Test
+    public void testClear() throws Exception {
+        IntArrayList list = IntArrayList.with(1, 5, 3, 1, 2, 6, 10, 101, 202, 303, 404, 505, 606, 707, 808, 909, 1024);
+
+        list.clear();
+
+        assertEquals(IntArrayList.empty(), list);
+        assertTrue(list.isEmpty());
+    }
+
+
 }

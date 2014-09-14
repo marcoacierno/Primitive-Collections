@@ -184,6 +184,14 @@ public class IntArrayList
         return elementsData[index];
     }
 
+    /**
+     * Clear the collection
+     */
+    public void clear() {
+        elementsData = new int[0];
+        size = 0;
+    }
+
     private void rangeCheckAdd(int index) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException(index + " is not a valid index");
