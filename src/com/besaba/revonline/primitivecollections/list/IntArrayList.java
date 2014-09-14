@@ -14,7 +14,8 @@ import java.util.RandomAccess;
  * @author Marco
  * @since 1.0
  */
-public class IntArrayList implements IntIterable, RandomAccess {
+public class IntArrayList
+        implements IntIterable, RandomAccess, Cloneable {
     private transient int[] elementsData;
     private int size;
 
@@ -236,5 +237,19 @@ public class IntArrayList implements IntIterable, RandomAccess {
     @Override
     public String toString() {
         return "Size: " + size + ", Values: " + Arrays.toString(elementsData);
+    }
+
+    @Override
+    protected IntArrayList clone() {
+        IntArrayList clone;
+
+        try {
+            clone = (IntArrayList) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();//never
+        }
+
+        clone.elementsData = elementsData.clone();
+        return clone;
     }
 }
