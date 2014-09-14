@@ -1,9 +1,8 @@
-package com.besaba.revonline.primitivecollections.list;
+package com.besaba.revonline.primitivecollections.list.arraylist;
 
 import com.besaba.revonline.primitivecollections.iterables.IntIterable;
 import com.besaba.revonline.primitivecollections.iterables.iterators.IntIterator;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.RandomAccess;
@@ -141,10 +140,10 @@ public class IntArrayList
                             );
         }
 
-        System.arraycopy(   fromList.elementsData, 0,
-                            elementsData, startIndex,
-                            fromList.size
-                        );
+        System.arraycopy(fromList.elementsData, 0,
+                elementsData, startIndex,
+                fromList.size
+        );
 
         size += fromList.size;
     }

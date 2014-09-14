@@ -1,6 +1,7 @@
-package com.besaba.revonline.primitivecollections.list;
+package com.besaba.revonline.primitivecollections.list.arraylist;
 
 import com.besaba.revonline.primitivecollections.iterables.iterators.IntIterator;
+import com.besaba.revonline.primitivecollections.list.arraylist.IntArrayList;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -301,5 +302,119 @@ public class IntArrayListTest {
         assertTrue(list.isEmpty());
     }
 
+    @Test
+    public void testSizeWithAnEmptyList() throws Exception {
+        assertEquals(0, IntArrayList.empty().size());
+    }
 
+    @Test
+    public void testIndexOfWithAnIntWhichIsNotInsideTheList() throws Exception {
+        assertEquals(-1, IntArrayList.with(5, 10).indexOf(3));
+    }
+
+    @Test
+    public void testIndexOfWithAnEmptyList() throws Exception {
+        assertEquals(-1, IntArrayList.empty().indexOf(101));
+    }
+
+    @Test
+    public void testContainsWithAnEmptyList() throws Exception {
+        assertFalse(IntArrayList.empty().contains(10));
+    }
+
+    @Test
+    public void testContainsWithAListWhichContainsTheValue() throws Exception {
+        assertTrue(IntArrayList.with(-5, -10, -15).contains(-10));
+    }
+
+    @Test
+    public void testContainsWithAListWhichGetsTheValueUsingAddAll() throws Exception {
+        IntArrayList list = IntArrayList.with(-1, -2, -3, -4);
+        list.addAll(IntArrayList.with(1, 2, 3, 4, -6));
+
+        assertTrue(list.contains(-6));
+    }
+
+    @Test
+    public void testContainsWithAListWhichGetsTheValueUsingAddAllAtTheIndex5() throws Exception {
+        IntArrayList list = IntArrayList.with(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+        list.addAllAt(5, IntArrayList.with(-1, -2, -3, 6, 6, 6, 6, 6, 7, 8, 8, 8, 8, 6, 1024));
+
+        assertTrue(list.contains(1024));
+    }
+
+    @Test
+    public void testContainsWithAListWithDuplicateNumbers() throws Exception {
+        assertTrue(IntArrayList.with(6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 3).contains(6));
+    }
+
+    @Test
+    public void testIndexOfWithAListWIthDuplicateNumbers() throws Exception {
+        assertEquals(2, IntArrayList.with(0, 5, 3, 1, 2, 3, 4, 5).indexOf(3));
+    }
+
+    // ============================================================================================================== //
+    // =============================== ArrayList<Integer> IntArrayList tests ======================================== //
+    // ============================================================================================================== //
+
+    @Test
+    public void vsTestClear() throws Exception {
+        IntArrayList intArrayList = IntArrayList.with(1, 5, 6, 7, 10, 101, 1010, 10101);
+        List<Integer> arrayList = new ArrayList<Integer>(Arrays.asList(1, 5, 6, 7, 10, 101, 1010, 10101));
+
+        arrayList.clear();
+        intArrayList.clear();
+
+        assertEquals(arrayList.size(), intArrayList.size());
+        assertEquals(arrayList.isEmpty(), intArrayList.isEmpty());
+    }
+
+    @Test
+    public void vsTestAddAndRemove() throws Exception {
+        IntArrayList intArrayList = IntArrayList.empty();
+        List<Integer> arrayList = new ArrayList<Integer>();
+
+        intArrayList.add(1);
+        arrayList.add(1);
+
+        assertEquals(intArrayList.get(0), (int) arrayList.get(0));
+
+        intArrayList.add(3);
+        arrayList.add(3);
+
+        assertEquals(intArrayList.get(1), (int) arrayList.get(1));
+
+        intArrayList.removeAt(1);
+        arrayList.remove(1);
+
+        assertEquals(intArrayList.size(), arrayList.size());
+    }
+
+    @Test
+    public void vsTestIndexOf() throws Exception {
+        IntArrayList intArrayList = IntArrayList.empty();
+        List<Integer> arrayList = new ArrayList<Integer>();
+
+        assertEquals(arrayList.indexOf(5), intArrayList.indexOf(5));
+
+        arrayList.add(5);
+
+        assertNotEquals(arrayList.indexOf(5), intArrayList.indexOf(5));
+
+        intArrayList.add(5);
+
+        assertEquals(arrayList.indexOf(5), intArrayList.indexOf(5));
+    }
+
+    @Test
+    public void vsTestContains() throws Exception {
+        IntArrayList intArrayList = IntArrayList.with(0, 101, 202, 303, 404, 505, 606);
+        List<Integer> arrayList = new ArrayList<Integer>(Arrays.asList(0, 10, 101, 202, 404, 505, 606));
+
+        assertEquals(intArrayList.contains(101), arrayList.contains(101));
+        assertEquals(intArrayList.contains(202), arrayList.contains(202));
+        assertEquals(intArrayList.contains(606), arrayList.contains(606));
+        assertNotEquals(intArrayList.contains(303), arrayList.contains(303));
+        assertNotEquals(intArrayList.contains(10), arrayList.contains(10));
+    }
 }
