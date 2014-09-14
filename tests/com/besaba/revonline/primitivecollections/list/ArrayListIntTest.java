@@ -158,7 +158,7 @@ public class ArrayListIntTest {
 
         assertEquals(3, list.size());
 
-        list.add(0, 5);
+        list.addAt(0, 5);
 
         assertEquals(4, list.size());
     }

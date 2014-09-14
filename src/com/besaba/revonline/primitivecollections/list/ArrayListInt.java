@@ -52,7 +52,7 @@ public class ArrayListInt implements IntIterable, RandomAccess {
         toList.elementsData = numbers;
         toList.size = numbers.length;
 
-        toList.add(0, number);
+        toList.addAt(0, number);
 
         return toList;
     }
@@ -86,7 +86,7 @@ public class ArrayListInt implements IntIterable, RandomAccess {
      * @param index The position
      * @param value The int to add
      */
-    public void add(int index, int value) {
+    public void addAt(int index, int value) {
         rangeCheckAdd(index);
         ensureCapacity(size + 1);
 
