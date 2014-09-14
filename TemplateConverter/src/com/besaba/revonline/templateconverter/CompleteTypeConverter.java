@@ -39,9 +39,23 @@ public class CompleteTypeConverter {
         // put it to true if you are recreating everything
         final boolean overrideIfExists = false; //oh and for now it doesn't work (lol it's not implemented yet)
         // types which will be used
-        final String[] types = {"boolean", "byte", "float", "short", "double", "char"};
+        final String[] typesToConvert = {"boolean", "byte", "float", "short", "double", "char"};
 
-        for (String type : types) {
+        // this map is used to convert every {{default}} to it
+        final Map<String, String> typeAndDefault = new HashMap<>();
+
+        typeAndDefault.put("boolean", "false");
+        typeAndDefault.put("byte", "0");
+        typeAndDefault.put("int", "0");
+        typeAndDefault.put("short", "0");
+        typeAndDefault.put("long", "0");
+        typeAndDefault.put("float", "0.0f");
+        typeAndDefault.put("double", "0.0d");
+        typeAndDefault.put("char", "'\\u0000'");
+        typeAndDefault.put("String", "null");
+
+
+        for (String type : typesToConvert) {
             System.out.println("Current type: " + type);
             String upperCaseType = Character.toUpperCase(type.charAt(0)) + type.substring(1);
             String className = upperCaseType + fileName;
@@ -57,6 +71,7 @@ public class CompleteTypeConverter {
             variabili.put("iterator", iteratorName);
             variabili.put("consumer", upperCaseType + "Consumer");
             variabili.put("upperCaseType", upperCaseType);
+            variabili.put("default", typeAndDefault.get(type));
 
             Path classFile = Paths.get(sourceClassDir, className + ".java");
             Path iteratorFile = Paths.get(sourceClassIterator, iteratorName + ".java");
