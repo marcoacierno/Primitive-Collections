@@ -371,6 +371,11 @@ public class IntArrayListTest {
         assertEquals(result, intermedia);
     }
 
+    @Test
+    public void testLastIndexOf() throws Exception {
+        assertEquals(8, IntArrayList.with(1, 9, 3, 4, 9, 6, 7, 8, 9).lastIndexOf(9));
+    }
+
     // ============================================================================================================== //
     // =============================== ArrayList<Integer> IntArrayList tests ======================================== //
     // ============================================================================================================== //

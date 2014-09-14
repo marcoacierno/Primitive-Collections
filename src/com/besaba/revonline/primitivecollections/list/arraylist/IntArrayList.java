@@ -245,6 +245,16 @@ public class IntArrayList
         return -1;
     }
 
+    public int lastIndexOf(int value) {
+        for (int i = size - 1; i >= 0; --i) {
+            if (elementsData[i] == value) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     @Override
     public IntIterator iterator() {
         return new IntIterator() {
