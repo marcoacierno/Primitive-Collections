@@ -14,7 +14,7 @@ import java.util.RandomAccess;
  * @author Marco
  * @since 1.0
  */
-public class {{type}}ArrayList
+public class {{className}}
         implements {{iterable}}, RandomAccess, Cloneable {
     private transient {{type}}[] elementsData;
     private int size;
@@ -114,7 +114,7 @@ public class {{type}}ArrayList
     public {{type}} set(int index, {{type}} newValue) {
         rangeCheckAdd(index);
 
-        int oldValue = elementsData[index];
+        {{type}} oldValue = elementsData[index];
         elementsData[index] = newValue;
         return oldValue;
     }
@@ -195,11 +195,11 @@ public class {{type}}ArrayList
      * Clear the collection
      */
     public void clear() {
-        elementsData = new int[0];
+        elementsData = new {{type}}[0];
         size = 0;
     }
 
-    public void forEach({{typeConsumer}} consumer) {
+    public void forEach({{consumer}} consumer) {
         for({{type}} value : elementsData) {
             consumer.accept(value);
         }
@@ -265,7 +265,7 @@ public class {{type}}ArrayList
     @Override
     public {{iterator}} iterator() {
         return new {{iterator}}() {
-            private {{type}} pointer;
+            private int pointer;
 
             @Override
             public boolean hasNext() {
@@ -284,7 +284,7 @@ public class {{type}}ArrayList
     }
 
     public {{type}}[] asArray() {
-        {{type}}[] array = new int[size];
+        {{type}}[] array = new {{type}}[size];
 
         System.arraycopy(elementsData, 0,
                          array, 0,
@@ -303,7 +303,7 @@ public class {{type}}ArrayList
             return false;
         }
 
-        if (obj instanceof IntArrayList) {
+        if (obj instanceof {{className}}) {
             {{className}} objList = ({{className}}) obj;
 
             return objList.size == this.size && Arrays.equals(objList.elementsData, this.elementsData);
