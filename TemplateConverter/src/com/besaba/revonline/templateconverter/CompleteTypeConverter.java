@@ -52,8 +52,6 @@ public class CompleteTypeConverter {
         typeAndDefault.put("float", "0.0f");
         typeAndDefault.put("double", "0.0d");
         typeAndDefault.put("char", "'\\\\u0000'");
-        typeAndDefault.put("String", "null");
-
 
         for (String type : typesToConvert) {
             System.out.println("Current type: " + type);
