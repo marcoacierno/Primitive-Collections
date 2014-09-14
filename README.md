@@ -18,3 +18,4 @@ So:
 - **Float**LinkedList -> LinkedList<Float>
 
 Create a default type (example ArrayList), implement it for a specific type, then write the generic template and use the converter to create the version for the other primitives
+Javadoc will be online [here](http://revonline.comuf.com/javadoc/primitivecollections/1/)
