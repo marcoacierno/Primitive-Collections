@@ -14,7 +14,7 @@ import java.util.Map;
  * @author Marco
  * @since 1.0
  */
-public class Main {
+public class FileByFileMain {
     // D:\Users\ReVo\Documents\IntelliJ IDEA\PrimitiveCollections\templates\List\ArrayList.txt
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -42,7 +42,7 @@ public class Main {
 
         System.out.println("OK: " + outputFileString);
 
-        Map<String, String> variabili = new HashMap<String, String>();
+        Map<String, String> variabili = new HashMap<>();
 
         variabili.put("type", type);
         variabili.put("className", className);

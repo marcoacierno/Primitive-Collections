@@ -1,8 +1,8 @@
 package com.besaba.revonline.primitivecollections.list.arraylist;
 
-import com.besaba.revonline.primitivecollections.function.{{consumer}};
-import com.besaba.revonline.primitivecollections.iterables.{{iterable}};
-import com.besaba.revonline.primitivecollections.iterables.iterators.{{iterator}};
+import com.besaba.revonline.primitivecollections.function.CharConsumer;
+import com.besaba.revonline.primitivecollections.iterables.CharIterable;
+import com.besaba.revonline.primitivecollections.iterables.iterators.CharIterator;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
@@ -14,9 +14,9 @@ import java.util.RandomAccess;
  * @author Marco
  * @since 1.0
  */
-public class {{className}}
-        implements {{iterable}}, RandomAccess, Cloneable {
-    private transient {{type}}[] elementsData;
+public class CharArrayList
+        implements CharIterable, RandomAccess, Cloneable {
+    private transient char[] elementsData;
     private int size;
 
     /**
@@ -25,8 +25,8 @@ public class {{className}}
      * @param capacity The start capacity
      * @return The created ArrayListInt
      */
-    public static {{className}} withCapacity(int capacity) {
-        return new {{className}}(capacity);
+    public static CharArrayList withCapacity(int capacity) {
+        return new CharArrayList(capacity);
     }
 
     /**
@@ -35,10 +35,10 @@ public class {{className}}
      * @param fromList The original list
      * @return The ArrayListInt which contains {@see fromList} values
      */
-    public static {{className}} from({{className}} fromList) {
-        {{className}} toList = new {{className}}(fromList.size);
+    public static CharArrayList from(CharArrayList fromList) {
+        CharArrayList toList = new CharArrayList(fromList.size);
 
-        {{iterator}} iterator = fromList.iterator();
+        CharIterator iterator = fromList.iterator();
         while (iterator.hasNext()) {
             toList.add(iterator.next());
         }
@@ -54,8 +54,8 @@ public class {{className}}
      * @param numbers Other values to insert
      * @return An IntArrayList with the values provided as arguments
      */
-    public static {{className}} with({{type}} number, {{type}}... numbers) {
-        {{className}} toList = new {{className}}(0);
+    public static CharArrayList with(char number, char... numbers) {
+        CharArrayList toList = new CharArrayList(0);
 
         toList.elementsData = numbers;
         toList.size = numbers.length;
@@ -69,16 +69,16 @@ public class {{className}}
      * Creates an empty IntArrayList
      * @return An empty list
      */
-    public static {{className}} empty() {
-        return {{className}}.withCapacity(0);
+    public static CharArrayList empty() {
+        return CharArrayList.withCapacity(0);
     }
 
-    private {{className}}(int capacity) {
+    private CharArrayList(int capacity) {
         if (capacity < 0) {
             throw new IllegalArgumentException(capacity + " is not a valid capacity.");
         }
 
-        elementsData = new {{type}}[capacity];
+        elementsData = new char[capacity];
     }
 
     /**
@@ -86,7 +86,7 @@ public class {{className}}
      *
      * @param value The int to add
      */
-    public void add({{type}} value) {
+    public void add(char value) {
         ensureCapacity(size + 1);
 
         elementsData[size++] = value;
@@ -98,7 +98,7 @@ public class {{className}}
      * @param index The position
      * @param value The int to add
      */
-    public void addAt(int index, {{type}} value) {
+    public void addAt(int index, char value) {
         rangeCheckAdd(index);
         ensureCapacity(size + 1);
 
@@ -111,10 +111,10 @@ public class {{className}}
         size++;
     }
 
-    public {{type}} set(int index, {{type}} newValue) {
+    public char set(int index, char newValue) {
         rangeCheckAdd(index);
 
-        {{type}} oldValue = elementsData[index];
+        char oldValue = elementsData[index];
         elementsData[index] = newValue;
         return oldValue;
     }
@@ -123,7 +123,7 @@ public class {{className}}
      * Adds in the List all the values inside {@see fromList}
      * @param fromList The list which contains the value to add
      */
-    public void addAll({{className}} fromList) {
+    public void addAll(CharArrayList fromList) {
         ensureCapacity(size + fromList.size);
 
         System.arraycopy(fromList.elementsData, 0, elementsData, size, fromList.size);
@@ -136,7 +136,7 @@ public class {{className}}
      * @param startIndex The index from where the values should be added
      * @param fromList The list which contains the value to add
      */
-    public void addAllAt(int startIndex, {{className}} fromList) {
+    public void addAllAt(int startIndex, CharArrayList fromList) {
         rangeCheckAdd(startIndex);
         ensureCapacity(size + fromList.size);
 
@@ -162,7 +162,7 @@ public class {{className}}
      * @param index The index to remove
      * @return The value which was inside the position
      */
-    public {{type}} removeAt(int index) {
+    public char removeAt(int index) {
         rangeCheckAdd(index);
 
         int from = size - index - 1;
@@ -187,7 +187,7 @@ public class {{className}}
      * @param index The index to read
      * @return The value
      */
-    public {{type}} get(int index) {
+    public char get(int index) {
         return elementsData[index];
     }
 
@@ -195,12 +195,12 @@ public class {{className}}
      * Clear the collection
      */
     public void clear() {
-        elementsData = new {{type}}[0];
+        elementsData = new char[0];
         size = 0;
     }
 
-    public void forEach({{consumer}} consumer) {
-        for({{type}} value : elementsData) {
+    public void forEach(CharConsumer consumer) {
+        for(char value : elementsData) {
             consumer.accept(value);
         }
     }
@@ -238,11 +238,11 @@ public class {{className}}
         return size == 0;
     }
 
-    public boolean contains({{type}} value) {
+    public boolean contains(char value) {
         return indexOf(value) >= 0;
     }
 
-    public int indexOf({{type}} value) {
+    public int indexOf(char value) {
         for (int i = 0; i < size; ++i) {
             if (elementsData[i] == value) {
                 return i;
@@ -252,7 +252,7 @@ public class {{className}}
         return -1;
     }
 
-    public int lastIndexOf({{type}} value) {
+    public int lastIndexOf(char value) {
         for (int i = size - 1; i >= 0; --i) {
             if (elementsData[i] == value) {
                 return i;
@@ -263,8 +263,8 @@ public class {{className}}
     }
 
     @Override
-    public {{iterator}} iterator() {
-        return new {{iterator}}() {
+    public CharIterator iterator() {
+        return new CharIterator() {
             private int pointer;
 
             @Override
@@ -273,7 +273,7 @@ public class {{className}}
             }
 
             @Override
-            public {{type}} next() {
+            public char next() {
                 if (pointer + 1 > size) {
                     throw new NoSuchElementException();
                 }
@@ -283,8 +283,8 @@ public class {{className}}
         };
     }
 
-    public {{type}}[] asArray() {
-        {{type}}[] array = new {{type}}[size];
+    public char[] asArray() {
+        char[] array = new char[size];
 
         System.arraycopy(elementsData, 0,
                          array, 0,
@@ -303,8 +303,8 @@ public class {{className}}
             return false;
         }
 
-        if (obj instanceof {{className}}) {
-            {{className}} objList = ({{className}}) obj;
+        if (obj instanceof CharArrayList) {
+            CharArrayList objList = (CharArrayList) obj;
 
             return objList.size == this.size && Arrays.equals(objList.elementsData, this.elementsData);
         }
@@ -323,11 +323,11 @@ public class {{className}}
     }
 
     @Override
-    protected {{className}} clone() {
-        {{className}} clone;
+    protected CharArrayList clone() {
+        CharArrayList clone;
 
         try {
-            clone = ({{className}}) super.clone();
+            clone = (CharArrayList) super.clone();
         } catch (CloneNotSupportedException e) {
             throw new AssertionError();//never
         }
