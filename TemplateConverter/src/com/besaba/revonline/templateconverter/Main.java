@@ -15,6 +15,7 @@ import java.util.Map;
  * @since 1.0
  */
 public class Main {
+    // D:\Users\ReVo\Documents\IntelliJ IDEA\PrimitiveCollections\templates\List\ArrayList.txt
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Posizione template");
@@ -48,6 +49,7 @@ public class Main {
         variabili.put("iterable", upperCaseType + "Iterable");
         variabili.put("iterator", upperCaseType + "Iterator");
         variabili.put("consumer", upperCaseType + "Consumer");
+        variabili.put("upperCaseType", upperCaseType);
 
         String newVariable;
 
