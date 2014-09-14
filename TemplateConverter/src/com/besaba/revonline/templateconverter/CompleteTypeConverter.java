@@ -69,7 +69,7 @@ public class CompleteTypeConverter {
             variabili.put("iterator", iteratorName);
             variabili.put("consumer", upperCaseType + "Consumer");
             variabili.put("upperCaseType", upperCaseType);
-            variabili.put("default", typeAndDefault.get(type));
+            variabili.put("default", String.valueOf(typeAndDefault.get(type)));
 
             Path classFile = Paths.get(sourceClassDir, className + ".java");
             Path iteratorFile = Paths.get(sourceClassIterator, iteratorName + ".java");
