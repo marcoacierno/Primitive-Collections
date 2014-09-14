@@ -1,5 +1,6 @@
 package com.besaba.revonline.primitivecollections.list.arraylist;
 
+import com.besaba.revonline.primitivecollections.function.IntConsumer;
 import com.besaba.revonline.primitivecollections.iterables.IntIterable;
 import com.besaba.revonline.primitivecollections.iterables.iterators.IntIterator;
 
@@ -189,6 +190,12 @@ public class IntArrayList
     public void clear() {
         elementsData = new int[0];
         size = 0;
+    }
+
+    public void forEach(IntConsumer consumer) {
+        for(int value : elementsData) {
+            consumer.accept(value);
+        }
     }
 
     private void rangeCheckAdd(int index) {

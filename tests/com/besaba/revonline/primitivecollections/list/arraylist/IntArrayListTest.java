@@ -1,5 +1,6 @@
 package com.besaba.revonline.primitivecollections.list.arraylist;
 
+import com.besaba.revonline.primitivecollections.function.IntConsumer;
 import com.besaba.revonline.primitivecollections.iterables.iterators.IntIterator;
 import com.besaba.revonline.primitivecollections.list.arraylist.IntArrayList;
 import org.junit.Test;
@@ -351,6 +352,23 @@ public class IntArrayListTest {
     @Test
     public void testIndexOfWithAListWIthDuplicateNumbers() throws Exception {
         assertEquals(2, IntArrayList.with(0, 5, 3, 1, 2, 3, 4, 5).indexOf(3));
+    }
+
+    @Test
+    public void testForEach() throws Exception {
+        IntArrayList start = IntArrayList.with(1, 2, 3, 4, 5);
+        IntArrayList result = IntArrayList.with(2, 4, 6, 8, 10);
+
+        final IntArrayList intermedia = IntArrayList.empty();
+
+        start.forEach(new IntConsumer() {
+            @Override
+            public void accept(int value) {
+                intermedia.add(value * 2);
+            }
+        });
+
+        assertEquals(result, intermedia);
     }
 
     // ============================================================================================================== //
