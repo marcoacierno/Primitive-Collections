@@ -1,5 +1,6 @@
 package com.besaba.revonline.primitivecollections.list.linkedlist;
 
+import com.besaba.revonline.primitivecollections.function.IntConsumer;
 import com.besaba.revonline.primitivecollections.iterables.iterators.IntIterator;
 import org.junit.Test;
 
@@ -210,5 +211,21 @@ public class IntLinkedListTest {
         IntLinkedList list = IntLinkedList.empty();
 
         assertEquals(-1, list.lastIndexOf(-3));
+    }
+
+    @Test
+    public void testForEach() throws Exception {
+        IntLinkedList start = IntLinkedList.with(1, 2, 3, 4, 5);
+        IntLinkedList result = IntLinkedList.with(2, 4, 6, 8, 10);
+
+        final IntLinkedList intermedia = IntLinkedList.empty();
+        start.forEach(new IntConsumer() {
+            @Override
+            public void accept(int value) {
+                intermedia.add(value * 2);
+            }
+        });
+
+        assertEquals(result, intermedia);
     }
 }

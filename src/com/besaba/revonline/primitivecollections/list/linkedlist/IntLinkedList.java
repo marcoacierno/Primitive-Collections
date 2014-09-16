@@ -1,5 +1,6 @@
 package com.besaba.revonline.primitivecollections.list.linkedlist;
 
+import com.besaba.revonline.primitivecollections.function.IntConsumer;
 import com.besaba.revonline.primitivecollections.iterables.IntIterable;
 import com.besaba.revonline.primitivecollections.iterables.iterators.IntIterator;
 
@@ -104,6 +105,12 @@ public class IntLinkedList implements IntIterable {
         }
 
         return -1;
+    }
+
+    public void forEach(IntConsumer consumer) {
+        for (Node node = header.next; node != header; node = node.next) {
+            consumer.accept(node.value);
+        }
     }
 
     private void addBefore(int value, Node before) {
