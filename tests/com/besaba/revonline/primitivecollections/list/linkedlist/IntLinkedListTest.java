@@ -228,4 +228,20 @@ public class IntLinkedListTest {
 
         assertEquals(result, intermedia);
     }
+
+    @Test
+    public void testForEachWithAnEmptyList() throws Exception {
+        IntLinkedList start = IntLinkedList.empty();
+        IntLinkedList result = IntLinkedList.empty();
+
+        final IntLinkedList intermedia = IntLinkedList.empty();
+        start.forEach(new IntConsumer() {
+            @Override
+            public void accept(int value) {
+                intermedia.add(value * 2);
+            }
+        });
+
+        assertEquals(result, intermedia);
+    }
 }
