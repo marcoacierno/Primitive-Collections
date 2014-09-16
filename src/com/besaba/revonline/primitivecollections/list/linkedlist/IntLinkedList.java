@@ -78,6 +78,20 @@ public class IntLinkedList implements IntIterable {
         return remove(header.previous);
     }
 
+    public int indexOf(int value) {
+        int index = 0;
+
+        for (Node node = header.next; node != header; node = node.next) {
+            if (node.value == value) {
+                return index;
+            }
+
+            ++index;
+        }
+
+        return -1;
+    }
+
     private void addBefore(int value, Node before) {
         Node newNode = new Node(value, before, before.previous);
 

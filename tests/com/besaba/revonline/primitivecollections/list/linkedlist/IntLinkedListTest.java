@@ -169,4 +169,25 @@ public class IntLinkedListTest {
 
         assertEquals(2, list.get(1));
     }
+
+    @Test
+    public void testIndexOf() throws Exception {
+        IntLinkedList list = IntLinkedList.with(-1, -2, -3, -4);
+
+        assertEquals(1, list.indexOf(-2));
+    }
+
+    @Test
+    public void testIndexOfWithWrongValue() throws Exception {
+        IntLinkedList list = IntLinkedList.with(-1, -2, -3, -4);
+
+        assertEquals(-1, list.indexOf(6));
+    }
+
+    @Test
+    public void testIndexOfWithEmptyList() throws Exception {
+        IntLinkedList list = IntLinkedList.empty();
+
+        assertEquals(-1, list.indexOf(6));
+    }
 }
