@@ -51,6 +51,7 @@ public class IntLinkedListTest {
 
     @Test
     public void testSize() throws Exception {
-
+        IntLinkedList list = IntLinkedList.with(1, 2, 3, 4, 5, -1, -2, -3, -4);
+        assertEquals(9, list.size());
     }
 }
