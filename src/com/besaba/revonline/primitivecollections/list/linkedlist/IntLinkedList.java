@@ -41,6 +41,24 @@ public class IntLinkedList implements IntIterable {
         return e.value;
     }
 
+    public int getFirst() {
+        if (size == 0) {
+            throw new NoSuchElementException();
+        }
+
+        return header.next.value;
+    }
+
+    public int getLast() {
+        if (size == 0) {
+            throw new NoSuchElementException();
+        }
+
+        return header.previous.value;
+    }
+
+
+
     public int removeAt(int index) {
         return remove(lookupNode(index));
     }

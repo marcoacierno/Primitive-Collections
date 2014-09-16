@@ -100,4 +100,26 @@ public class IntLinkedListTest {
     public void testEquals() throws Exception {
 
     }
+
+    @Test
+    public void testGetFirst() throws Exception {
+        IntLinkedList list = IntLinkedList.with(5, 4, 3, 2, 1);
+        assertEquals(5, list.getFirst());
+    }
+
+    @Test
+    public void testGetLast() throws Exception {
+        IntLinkedList list = IntLinkedList.with(5, 4, 3, 2, 1);
+        assertEquals(1, list.getLast());
+    }
+
+    @Test
+    public void testHashCode() throws Exception {
+
+    }
+
+    @Test
+    public void testToString() throws Exception {
+
+    }
 }
