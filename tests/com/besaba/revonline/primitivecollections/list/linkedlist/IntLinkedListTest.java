@@ -190,4 +190,25 @@ public class IntLinkedListTest {
 
         assertEquals(-1, list.indexOf(6));
     }
+
+    @Test
+    public void testLastIndexOf() throws Exception {
+        IntLinkedList list = IntLinkedList.with(-1, -3, -3, -4);
+
+        assertEquals(2, list.lastIndexOf(-3));
+    }
+
+    @Test
+    public void testLastIndexOfWithTwoFarValues() throws Exception {
+        IntLinkedList list = IntLinkedList.with(-1, -3, -3, -4, -3, -2, -1, -4, -4, -4, -3);
+
+        assertEquals(10, list.lastIndexOf(-3));
+    }
+
+    @Test
+    public void testLastIndexOfWithAnEmptyList() throws Exception {
+        IntLinkedList list = IntLinkedList.empty();
+
+        assertEquals(-1, list.lastIndexOf(-3));
+    }
 }
