@@ -25,7 +25,10 @@ public class IntArrayListTest {
 
     @Test
     public void testFrom() throws Exception {
+        IntArrayList list1 = IntArrayList.with(1, 2, 3, 4);
+        IntArrayList list2 = IntArrayList.from(list1);
 
+        assertEquals(list1, list2);
     }
 
     @Test
