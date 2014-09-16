@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 import static org.junit.Assert.*;
 
@@ -122,4 +123,43 @@ public class IntLinkedListTest {
     public void testToString() throws Exception {
 
     }
+
+    @Test
+    public void testRemoveFirst() throws Exception {
+        IntLinkedList list = IntLinkedList.with(5, 4, 3, 2, 1);
+
+        assertEquals(5, list.removeFirst());
+        assertEquals(4, list.size());
+    }
+
+    @Test
+    public void testRemoveLast() throws Exception {
+        IntLinkedList list = IntLinkedList.with(5, 4, 3, 2, 1);
+
+        assertEquals(1, list.removeLast());
+        assertEquals(4, list.size());
+    }
+
+    @Test
+    public void testRemoveFirstAndCompare() throws Exception {
+        IntLinkedList list = IntLinkedList.with(1, 2, 3, 4, 5, 6, 7);
+        list.removeFirst();
+        list.removeFirst();
+
+        assertEquals(IntLinkedList.with(3, 4, 5, 6, 7), list);
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void testRemoveFirstWithAnEmptyList() throws Exception {
+        IntLinkedList list = IntLinkedList.empty();
+        list.removeFirst();
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void testRemoveLastWithAnEmptyList() throws Exception {
+        IntLinkedList list = IntLinkedList.empty();
+        list.removeLast();
+    }
+
+
 }

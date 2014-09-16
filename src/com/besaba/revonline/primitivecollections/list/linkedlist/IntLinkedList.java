@@ -57,10 +57,16 @@ public class IntLinkedList implements IntIterable {
         return header.previous.value;
     }
 
-
-
     public int removeAt(int index) {
         return remove(lookupNode(index));
+    }
+
+    public int removeFirst() {
+        return remove(header.next);
+    }
+
+    public int removeLast() {
+        return remove(header.previous);
     }
 
     private void addBefore(int value, Node before) {
