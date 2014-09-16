@@ -262,4 +262,20 @@ public class IntLinkedListTest {
 
         assertNotEquals(original, clone);
     }
+
+    @Test
+    public void testAddFirst() throws Exception {
+        IntLinkedList list = IntLinkedList.with(1, 2, 3);
+        list.addFirst(5);
+
+        assertArrayEquals(new int[] {5, 1, 2, 3}, list.asArray());
+    }
+
+    @Test
+    public void testAddFirstInAnEmptyCollection() throws Exception {
+        IntLinkedList list = IntLinkedList.empty();
+        list.addFirst(3);
+
+        assertArrayEquals(new int[] {3}, list.asArray());
+    }
 }

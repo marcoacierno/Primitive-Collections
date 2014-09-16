@@ -36,6 +36,10 @@ public class IntLinkedList implements IntIterable, Cloneable {
         addBefore(value, header);
     }
 
+    public void addFirst(int value) {
+        addBefore(value, header.next);
+    }
+
     public int get(int index) {
         Node e = lookupNode(index);
 
