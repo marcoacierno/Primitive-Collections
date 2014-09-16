@@ -66,10 +66,8 @@ public class IntLinkedListTest {
         IntLinkedList list = IntLinkedList.with(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
 
         list.removeAt(0);
-        list.removeAt(1);
-        list.removeAt(2);
 
-        IntLinkedList result = IntLinkedList.with(4, 5, 6, 7, 8, 9, 10, 11, 12);
+        IntLinkedList result = IntLinkedList.with(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
 
         assertEquals(result, list);
     }

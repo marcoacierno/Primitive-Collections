@@ -135,9 +135,51 @@ public class IntLinkedList implements IntIterable {
 
         if (obj instanceof IntLinkedList) {
             IntLinkedList linkedList = (IntLinkedList) obj;
-            return linkedList.size == size;
+
+            if (linkedList.size != size) {
+                return false;
+            }
+
+            IntIterator iterator1 = this.iterator();
+            IntIterator iterator2 = linkedList.iterator();
+
+            while (iterator1.hasNext() && iterator2.hasNext()) {
+                if (iterator1.next() != iterator2.next()) {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hashCode = 1;
+        IntIterator iterator = iterator();
+
+        while (iterator.hasNext()) {
+            hashCode = 31 * hashCode + iterator.next();
+        }
+
+        return hashCode;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Size: ").append(size).append(", Values: ");
+
+        IntIterator iterator = iterator();
+
+        while (iterator.hasNext()) {
+            builder.append(iterator.next()).append(", ");
+        }
+
+        builder.setLength(builder.length() - 2);
+
+        return builder.toString();
     }
 }
