@@ -162,4 +162,11 @@ public class IntLinkedListTest {
     }
 
 
+    @Test
+    public void testSet() throws Exception {
+        IntLinkedList list = IntLinkedList.with(-1, -2, -3, -4);
+        list.set(1, 2);
+
+        assertEquals(2, list.get(1));
+    }
 }

@@ -57,6 +57,15 @@ public class IntLinkedList implements IntIterable {
         return header.previous.value;
     }
 
+    public int set(int index, int value) {
+        Node prev = lookupNode(index);
+
+        int oldValue = prev.value;
+        prev.value = value;
+
+        return oldValue;
+    }
+
     public int removeAt(int index) {
         return remove(lookupNode(index));
     }
