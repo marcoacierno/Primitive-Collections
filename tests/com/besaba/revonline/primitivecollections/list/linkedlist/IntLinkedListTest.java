@@ -1,5 +1,6 @@
 package com.besaba.revonline.primitivecollections.list.linkedlist;
 
+import com.besaba.revonline.primitivecollections.iterables.iterators.IntIterator;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -53,5 +54,52 @@ public class IntLinkedListTest {
     public void testSize() throws Exception {
         IntLinkedList list = IntLinkedList.with(1, 2, 3, 4, 5, -1, -2, -3, -4);
         assertEquals(9, list.size());
+    }
+
+    @Test
+    public void testGet() throws Exception {
+
+    }
+
+    @Test
+    public void testRemoveAt() throws Exception {
+        IntLinkedList list = IntLinkedList.with(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+
+        list.removeAt(0);
+        list.removeAt(1);
+        list.removeAt(2);
+
+        IntLinkedList result = IntLinkedList.with(4, 5, 6, 7, 8, 9, 10, 11, 12);
+
+        assertEquals(result, list);
+    }
+
+    @Test
+    public void testIterator() throws Exception {
+        IntLinkedList list = IntLinkedList.with(1, 2, 3, 4, 5, 6);
+        IntIterator iterator = list.iterator();
+
+        assertEquals(1, iterator.next());
+        assertTrue(iterator.hasNext());
+
+        assertEquals(2, iterator.next());
+        assertTrue(iterator.hasNext());
+
+        assertEquals(3, iterator.next());
+        assertTrue(iterator.hasNext());
+
+        assertEquals(4, iterator.next());
+        assertTrue(iterator.hasNext());
+
+        assertEquals(5, iterator.next());
+        assertTrue(iterator.hasNext());
+
+        assertEquals(6, iterator.next());
+        assertFalse(iterator.hasNext());
+    }
+
+    @Test
+    public void testEquals() throws Exception {
+
     }
 }
