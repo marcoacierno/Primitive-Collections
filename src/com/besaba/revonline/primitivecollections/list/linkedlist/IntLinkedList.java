@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
  * @author Marco
  * @since 1.0
  */
-public class IntLinkedList implements IntIterable {
+public class IntLinkedList implements IntIterable, Cloneable {
     private transient Node header = new Node(0, null, null);
     private transient int size;
 
@@ -264,5 +264,29 @@ public class IntLinkedList implements IntIterable {
         builder.setLength(builder.length() - 2);
 
         return builder.toString();
+    }
+
+    @Override
+    protected IntLinkedList clone() {
+        final IntLinkedList linkedList;
+
+        try {
+            linkedList = (IntLinkedList) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+
+        linkedList.header = new Node(0, null, null);
+        linkedList.header.next = linkedList.header.previous = linkedList.header;
+        linkedList.size = 0;
+
+        forEach(new IntConsumer() {
+            @Override
+            public void accept(int value) {
+                linkedList.add(value);
+            }
+        });
+
+        return linkedList;
     }
 }

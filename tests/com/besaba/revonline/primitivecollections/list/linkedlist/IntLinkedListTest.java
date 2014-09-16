@@ -248,6 +248,18 @@ public class IntLinkedListTest {
     @Test
     public void testAsArray() throws Exception {
         IntLinkedList linkedList = IntLinkedList.with(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-        assertArrayEquals(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, linkedList.asArray());
+        assertArrayEquals(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, linkedList.asArray());
+    }
+
+    @Test
+    public void testClone() throws Exception {
+        IntLinkedList original = IntLinkedList.with(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        IntLinkedList clone = original.clone();
+
+        assertEquals(original, clone);
+
+        clone.removeFirst();
+
+        assertNotEquals(original, clone);
     }
 }
