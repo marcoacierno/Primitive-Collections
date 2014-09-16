@@ -31,7 +31,7 @@ public class IntLinkedList {
     }
 
     public int get(int index) {
-        if (index < 0 || index > size) {
+        if (index < 0 || index >= size) {
             throw new IllegalArgumentException("Size: " + size + ", Index: " + index);
         }
 

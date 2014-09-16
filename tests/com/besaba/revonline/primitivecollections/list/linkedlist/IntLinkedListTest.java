@@ -37,4 +37,20 @@ public class IntLinkedListTest {
         assertEquals(list.get(0), (int)list2.get(0));
         assertEquals(list.get(1), (int)list2.get(1));
     }
+
+    @Test
+    public void testEmpty() throws Exception {
+
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetInAnEmptyLinkedList() throws Exception {
+        IntLinkedList list = IntLinkedList.empty();
+        list.get(0);
+    }
+
+    @Test
+    public void testSize() throws Exception {
+
+    }
 }
