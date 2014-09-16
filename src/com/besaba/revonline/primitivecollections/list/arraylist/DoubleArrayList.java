@@ -36,15 +36,13 @@ public class DoubleArrayList
      * @return The ArrayListInt which contains {@see fromList} values
      */
     public static DoubleArrayList from(DoubleArrayList fromList) {
-        DoubleArrayList toList = new DoubleArrayList(fromList.size);
-
-        DoubleIterator iterator = fromList.iterator();
-        while (iterator.hasNext()) {
-            toList.add(iterator.next());
-        }
+        DoubleArrayList toList = new DoubleArrayList(0);
+        toList.elementsData = fromList.asArray();
+        toList.size = fromList.size;
 
         return toList;
     }
+
 
     /**
      * Creates an  with the values provided as argument

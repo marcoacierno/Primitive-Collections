@@ -36,15 +36,13 @@ public class ShortArrayList
      * @return The ArrayListInt which contains {@see fromList} values
      */
     public static ShortArrayList from(ShortArrayList fromList) {
-        ShortArrayList toList = new ShortArrayList(fromList.size);
-
-        ShortIterator iterator = fromList.iterator();
-        while (iterator.hasNext()) {
-            toList.add(iterator.next());
-        }
+        ShortArrayList toList = new ShortArrayList(0);
+        toList.elementsData = fromList.asArray();
+        toList.size = fromList.size;
 
         return toList;
     }
+
 
     /**
      * Creates an  with the values provided as argument

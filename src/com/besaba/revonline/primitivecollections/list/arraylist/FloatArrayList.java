@@ -36,15 +36,13 @@ public class FloatArrayList
      * @return The ArrayListInt which contains {@see fromList} values
      */
     public static FloatArrayList from(FloatArrayList fromList) {
-        FloatArrayList toList = new FloatArrayList(fromList.size);
-
-        FloatIterator iterator = fromList.iterator();
-        while (iterator.hasNext()) {
-            toList.add(iterator.next());
-        }
+        FloatArrayList toList = new FloatArrayList(0);
+        toList.elementsData = fromList.asArray();
+        toList.size = fromList.size;
 
         return toList;
     }
+
 
     /**
      * Creates an  with the values provided as argument

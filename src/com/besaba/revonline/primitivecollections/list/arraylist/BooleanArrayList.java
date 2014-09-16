@@ -36,15 +36,13 @@ public class BooleanArrayList
      * @return The ArrayListInt which contains {@see fromList} values
      */
     public static BooleanArrayList from(BooleanArrayList fromList) {
-        BooleanArrayList toList = new BooleanArrayList(fromList.size);
-
-        BooleanIterator iterator = fromList.iterator();
-        while (iterator.hasNext()) {
-            toList.add(iterator.next());
-        }
+        BooleanArrayList toList = new BooleanArrayList(0);
+        toList.elementsData = fromList.asArray();
+        toList.size = fromList.size;
 
         return toList;
     }
+
 
     /**
      * Creates an  with the values provided as argument

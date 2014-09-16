@@ -36,15 +36,13 @@ public class ByteArrayList
      * @return The ArrayListInt which contains {@see fromList} values
      */
     public static ByteArrayList from(ByteArrayList fromList) {
-        ByteArrayList toList = new ByteArrayList(fromList.size);
-
-        ByteIterator iterator = fromList.iterator();
-        while (iterator.hasNext()) {
-            toList.add(iterator.next());
-        }
+        ByteArrayList toList = new ByteArrayList(0);
+        toList.elementsData = fromList.asArray();
+        toList.size = fromList.size;
 
         return toList;
     }
+
 
     /**
      * Creates an  with the values provided as argument

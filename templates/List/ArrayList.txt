@@ -36,15 +36,13 @@ public class {{className}}
      * @return The ArrayListInt which contains {@see fromList} values
      */
     public static {{className}} from({{className}} fromList) {
-        {{className}} toList = new {{className}}(fromList.size);
-
-        {{iterator}} iterator = fromList.iterator();
-        while (iterator.hasNext()) {
-            toList.add(iterator.next());
-        }
+        {{className}} toList = new {{className}}(0);
+        toList.elementsData = fromList.asArray();
+        toList.size = fromList.size;
 
         return toList;
     }
+
 
     /**
      * Creates an  with the values provided as argument

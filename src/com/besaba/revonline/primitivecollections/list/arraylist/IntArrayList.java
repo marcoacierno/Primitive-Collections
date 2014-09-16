@@ -36,12 +36,9 @@ public class IntArrayList
      * @return The ArrayListInt which contains {@see fromList} values
      */
     public static IntArrayList from(IntArrayList fromList) {
-        IntArrayList toList = new IntArrayList(fromList.size);
-
-        IntIterator iterator = fromList.iterator();
-        while (iterator.hasNext()) {
-            toList.add(iterator.next());
-        }
+        IntArrayList toList = new IntArrayList(0);
+        toList.elementsData = fromList.asArray();
+        toList.size = fromList.size;
 
         return toList;
     }

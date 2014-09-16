@@ -36,15 +36,13 @@ public class CharArrayList
      * @return The ArrayListInt which contains {@see fromList} values
      */
     public static CharArrayList from(CharArrayList fromList) {
-        CharArrayList toList = new CharArrayList(fromList.size);
-
-        CharIterator iterator = fromList.iterator();
-        while (iterator.hasNext()) {
-            toList.add(iterator.next());
-        }
+        CharArrayList toList = new CharArrayList(0);
+        toList.elementsData = fromList.asArray();
+        toList.size = fromList.size;
 
         return toList;
     }
+
 
     /**
      * Creates an  with the values provided as argument
