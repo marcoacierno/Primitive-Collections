@@ -107,6 +107,21 @@ public class IntLinkedList implements IntIterable {
         return -1;
     }
 
+    public int[] asArray() {
+        final int[] array = new int[size];
+
+        forEach(new IntConsumer() {
+            private int index = 0;
+
+            @Override
+            public void accept(int value) {
+                array[index++] = value;
+            }
+        });
+
+        return array;
+    }
+
     public void forEach(IntConsumer consumer) {
         for (Node node = header.next; node != header; node = node.next) {
             consumer.accept(node.value);

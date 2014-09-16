@@ -244,4 +244,10 @@ public class IntLinkedListTest {
 
         assertEquals(result, intermedia);
     }
+
+    @Test
+    public void testAsArray() throws Exception {
+        IntLinkedList linkedList = IntLinkedList.with(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        assertArrayEquals(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, linkedList.asArray());
+    }
 }
