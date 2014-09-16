@@ -1,6 +1,7 @@
 package com.besaba.revonline.primitivecollections.list.linkedlist;
 
 import com.besaba.revonline.primitivecollections.function.DoubleConsumer;
+import com.besaba.revonline.primitivecollections.internal.Utils;
 import com.besaba.revonline.primitivecollections.iterables.DoubleIterable;
 import com.besaba.revonline.primitivecollections.iterables.iterators.DoubleIterator;
 
@@ -11,7 +12,7 @@ import java.util.NoSuchElementException;
  * @since 1.0
  */
 public class DoubleLinkedList implements DoubleIterable, Cloneable {
-    private transient Node header = new Node(0.0d, null, null);
+    private transient Node header = new Node((double)0.0d, null, null);
     private transient int size;
 
     private DoubleLinkedList() {
@@ -182,7 +183,7 @@ public class DoubleLinkedList implements DoubleIterable, Cloneable {
     public DoubleIterator iterator() {
         return new DoubleIterator() {
             private Node current = header;
-            private double pointer;
+            private int pointer;
 
             @Override
             public boolean hasNext() {
@@ -248,7 +249,7 @@ public class DoubleLinkedList implements DoubleIterable, Cloneable {
         DoubleIterator iterator = iterator();
 
         while (iterator.hasNext()) {
-            hashCode = 31 * hashCode + iterator.next();
+            hashCode = 31 * hashCode + Utils.hashCode(iterator.next());
         }
 
         return hashCode;
@@ -280,7 +281,7 @@ public class DoubleLinkedList implements DoubleIterable, Cloneable {
             throw new AssertionError();
         }
 
-        linkedList.header = new Node(0.0d, null, null);
+        linkedList.header = new Node((double)0.0d, null, null);
         linkedList.header.next = linkedList.header.previous = linkedList.header;
         linkedList.size = 0;
 

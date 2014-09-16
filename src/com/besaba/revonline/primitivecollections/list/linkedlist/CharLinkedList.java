@@ -1,6 +1,7 @@
 package com.besaba.revonline.primitivecollections.list.linkedlist;
 
 import com.besaba.revonline.primitivecollections.function.CharConsumer;
+import com.besaba.revonline.primitivecollections.internal.Utils;
 import com.besaba.revonline.primitivecollections.iterables.CharIterable;
 import com.besaba.revonline.primitivecollections.iterables.iterators.CharIterator;
 
@@ -11,7 +12,7 @@ import java.util.NoSuchElementException;
  * @since 1.0
  */
 public class CharLinkedList implements CharIterable, Cloneable {
-    private transient Node header = new Node('\u0000', null, null);
+    private transient Node header = new Node((char)'\u0000', null, null);
     private transient int size;
 
     private CharLinkedList() {
@@ -182,7 +183,7 @@ public class CharLinkedList implements CharIterable, Cloneable {
     public CharIterator iterator() {
         return new CharIterator() {
             private Node current = header;
-            private char pointer;
+            private int pointer;
 
             @Override
             public boolean hasNext() {
@@ -248,7 +249,7 @@ public class CharLinkedList implements CharIterable, Cloneable {
         CharIterator iterator = iterator();
 
         while (iterator.hasNext()) {
-            hashCode = 31 * hashCode + iterator.next();
+            hashCode = 31 * hashCode + Utils.hashCode(iterator.next());
         }
 
         return hashCode;
@@ -280,7 +281,7 @@ public class CharLinkedList implements CharIterable, Cloneable {
             throw new AssertionError();
         }
 
-        linkedList.header = new Node('\u0000', null, null);
+        linkedList.header = new Node((char)'\u0000', null, null);
         linkedList.header.next = linkedList.header.previous = linkedList.header;
         linkedList.size = 0;
 

@@ -1,6 +1,7 @@
 package com.besaba.revonline.primitivecollections.list.linkedlist;
 
 import com.besaba.revonline.primitivecollections.function.IntConsumer;
+import com.besaba.revonline.primitivecollections.internal.Utils;
 import com.besaba.revonline.primitivecollections.iterables.IntIterable;
 import com.besaba.revonline.primitivecollections.iterables.iterators.IntIterator;
 
@@ -141,6 +142,10 @@ public class IntLinkedList implements IntIterable, Cloneable {
         size++;
     }
 
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
     public int size() {
         return size;
     }
@@ -248,7 +253,7 @@ public class IntLinkedList implements IntIterable, Cloneable {
         IntIterator iterator = iterator();
 
         while (iterator.hasNext()) {
-            hashCode = 31 * hashCode + iterator.next();
+            hashCode = 31 * hashCode + Utils.hashCode(iterator.next());
         }
 
         return hashCode;

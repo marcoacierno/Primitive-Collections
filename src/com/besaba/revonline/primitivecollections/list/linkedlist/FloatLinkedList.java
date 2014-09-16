@@ -1,6 +1,7 @@
 package com.besaba.revonline.primitivecollections.list.linkedlist;
 
 import com.besaba.revonline.primitivecollections.function.FloatConsumer;
+import com.besaba.revonline.primitivecollections.internal.Utils;
 import com.besaba.revonline.primitivecollections.iterables.FloatIterable;
 import com.besaba.revonline.primitivecollections.iterables.iterators.FloatIterator;
 
@@ -11,7 +12,7 @@ import java.util.NoSuchElementException;
  * @since 1.0
  */
 public class FloatLinkedList implements FloatIterable, Cloneable {
-    private transient Node header = new Node(0.0f, null, null);
+    private transient Node header = new Node((float)0.0f, null, null);
     private transient int size;
 
     private FloatLinkedList() {
@@ -182,7 +183,7 @@ public class FloatLinkedList implements FloatIterable, Cloneable {
     public FloatIterator iterator() {
         return new FloatIterator() {
             private Node current = header;
-            private float pointer;
+            private int pointer;
 
             @Override
             public boolean hasNext() {
@@ -248,7 +249,7 @@ public class FloatLinkedList implements FloatIterable, Cloneable {
         FloatIterator iterator = iterator();
 
         while (iterator.hasNext()) {
-            hashCode = 31 * hashCode + iterator.next();
+            hashCode = 31 * hashCode + Utils.hashCode(iterator.next());
         }
 
         return hashCode;
@@ -280,7 +281,7 @@ public class FloatLinkedList implements FloatIterable, Cloneable {
             throw new AssertionError();
         }
 
-        linkedList.header = new Node(0.0f, null, null);
+        linkedList.header = new Node((float)0.0f, null, null);
         linkedList.header.next = linkedList.header.previous = linkedList.header;
         linkedList.size = 0;
 

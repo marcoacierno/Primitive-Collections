@@ -1,6 +1,7 @@
 package com.besaba.revonline.primitivecollections.list.linkedlist;
 
 import com.besaba.revonline.primitivecollections.function.ByteConsumer;
+import com.besaba.revonline.primitivecollections.internal.Utils;
 import com.besaba.revonline.primitivecollections.iterables.ByteIterable;
 import com.besaba.revonline.primitivecollections.iterables.iterators.ByteIterator;
 
@@ -11,7 +12,7 @@ import java.util.NoSuchElementException;
  * @since 1.0
  */
 public class ByteLinkedList implements ByteIterable, Cloneable {
-    private transient Node header = new Node(0, null, null);
+    private transient Node header = new Node((byte)0, null, null);
     private transient int size;
 
     private ByteLinkedList() {
@@ -182,7 +183,7 @@ public class ByteLinkedList implements ByteIterable, Cloneable {
     public ByteIterator iterator() {
         return new ByteIterator() {
             private Node current = header;
-            private byte pointer;
+            private int pointer;
 
             @Override
             public boolean hasNext() {
@@ -248,7 +249,7 @@ public class ByteLinkedList implements ByteIterable, Cloneable {
         ByteIterator iterator = iterator();
 
         while (iterator.hasNext()) {
-            hashCode = 31 * hashCode + iterator.next();
+            hashCode = 31 * hashCode + Utils.hashCode(iterator.next());
         }
 
         return hashCode;
@@ -280,7 +281,7 @@ public class ByteLinkedList implements ByteIterable, Cloneable {
             throw new AssertionError();
         }
 
-        linkedList.header = new Node(0, null, null);
+        linkedList.header = new Node((byte)0, null, null);
         linkedList.header.next = linkedList.header.previous = linkedList.header;
         linkedList.size = 0;
 

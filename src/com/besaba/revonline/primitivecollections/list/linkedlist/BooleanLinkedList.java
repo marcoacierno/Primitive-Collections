@@ -1,6 +1,7 @@
 package com.besaba.revonline.primitivecollections.list.linkedlist;
 
 import com.besaba.revonline.primitivecollections.function.BooleanConsumer;
+import com.besaba.revonline.primitivecollections.internal.Utils;
 import com.besaba.revonline.primitivecollections.iterables.BooleanIterable;
 import com.besaba.revonline.primitivecollections.iterables.iterators.BooleanIterator;
 
@@ -11,7 +12,7 @@ import java.util.NoSuchElementException;
  * @since 1.0
  */
 public class BooleanLinkedList implements BooleanIterable, Cloneable {
-    private transient Node header = new Node(false, null, null);
+    private transient Node header = new Node((boolean)false, null, null);
     private transient int size;
 
     private BooleanLinkedList() {
@@ -182,7 +183,7 @@ public class BooleanLinkedList implements BooleanIterable, Cloneable {
     public BooleanIterator iterator() {
         return new BooleanIterator() {
             private Node current = header;
-            private boolean pointer;
+            private int pointer;
 
             @Override
             public boolean hasNext() {
@@ -248,7 +249,7 @@ public class BooleanLinkedList implements BooleanIterable, Cloneable {
         BooleanIterator iterator = iterator();
 
         while (iterator.hasNext()) {
-            hashCode = 31 * hashCode + iterator.next();
+            hashCode = 31 * hashCode + Utils.hashCode(iterator.next());
         }
 
         return hashCode;
@@ -280,7 +281,7 @@ public class BooleanLinkedList implements BooleanIterable, Cloneable {
             throw new AssertionError();
         }
 
-        linkedList.header = new Node(false, null, null);
+        linkedList.header = new Node((boolean)false, null, null);
         linkedList.header.next = linkedList.header.previous = linkedList.header;
         linkedList.size = 0;
 

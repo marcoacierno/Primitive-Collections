@@ -278,4 +278,28 @@ public class IntLinkedListTest {
 
         assertArrayEquals(new int[] {3}, list.asArray());
     }
+
+    @Test
+    public void testIsEmpty() throws Exception {
+        assertTrue(IntLinkedList.empty().isEmpty());
+    }
+
+    @Test
+    public void testIsEmptyAfterSomeDeletes() throws Exception {
+        IntLinkedList list = IntLinkedList.empty();
+
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+
+        list.removeAt(0);
+        list.removeAt(0);
+        list.removeAt(0);
+        list.removeAt(0);
+
+        assertTrue(list.isEmpty());
+    }
+
+
 }

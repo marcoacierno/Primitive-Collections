@@ -1,6 +1,7 @@
 package com.besaba.revonline.primitivecollections.list.linkedlist;
 
 import com.besaba.revonline.primitivecollections.function.{{consumer}};
+import com.besaba.revonline.primitivecollections.internal.Utils;
 import com.besaba.revonline.primitivecollections.iterables.{{iterable}};
 import com.besaba.revonline.primitivecollections.iterables.iterators.{{iterator}};
 
@@ -11,7 +12,7 @@ import java.util.NoSuchElementException;
  * @since 1.0
  */
 public class {{className}} implements {{iterable}}, Cloneable {
-    private transient Node header = new Node({{default}}, null, null);
+    private transient Node header = new Node(({{type}}){{default}}, null, null);
     private transient int size;
 
     private {{className}}() {
@@ -182,7 +183,7 @@ public class {{className}} implements {{iterable}}, Cloneable {
     public {{iterator}} iterator() {
         return new {{iterator}}() {
             private Node current = header;
-            private {{type}} pointer;
+            private int pointer;
 
             @Override
             public boolean hasNext() {
@@ -248,7 +249,7 @@ public class {{className}} implements {{iterable}}, Cloneable {
         {{iterator}} iterator = iterator();
 
         while (iterator.hasNext()) {
-            hashCode = 31 * hashCode + iterator.next();
+            hashCode = 31 * hashCode + Utils.hashCode(iterator.next());
         }
 
         return hashCode;
@@ -280,7 +281,7 @@ public class {{className}} implements {{iterable}}, Cloneable {
             throw new AssertionError();
         }
 
-        linkedList.header = new Node({{default}}, null, null);
+        linkedList.header = new Node(({{type}}){{default}}, null, null);
         linkedList.header.next = linkedList.header.previous = linkedList.header;
         linkedList.size = 0;
 
