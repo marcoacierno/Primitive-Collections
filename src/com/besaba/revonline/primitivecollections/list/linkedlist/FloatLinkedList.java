@@ -272,7 +272,7 @@ public class FloatLinkedList implements FloatIterable, Cloneable {
     }
 
     @Override
-    protected FloatLinkedList clone() {
+    public FloatLinkedList clone() {
         final FloatLinkedList linkedList;
 
         try {

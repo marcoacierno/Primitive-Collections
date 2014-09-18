@@ -321,7 +321,7 @@ public class ByteArrayList
     }
 
     @Override
-    protected ByteArrayList clone() {
+    public ByteArrayList clone() {
         ByteArrayList clone;
 
         try {

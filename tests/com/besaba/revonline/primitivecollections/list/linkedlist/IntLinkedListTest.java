@@ -264,11 +264,27 @@ public class IntLinkedListTest {
     }
 
     @Test
-    public void testAddFirst() throws Exception {
+    public void testAddFirstAndThenConvertToArray() throws Exception {
         IntLinkedList list = IntLinkedList.with(1, 2, 3);
         list.addFirst(5);
 
         assertArrayEquals(new int[] {5, 1, 2, 3}, list.asArray());
+    }
+
+    @Test
+    public void testAddFirst() throws Exception {
+        IntLinkedList list = IntLinkedList.empty();
+        list.addFirst(1);
+        list.addFirst(2);
+        list.addFirst(3);
+        list.addFirst(4);
+        list.addFirst(5);
+
+        assertEquals(5, list.get(0));
+        assertEquals(4, list.get(1));
+        assertEquals(3, list.get(2));
+        assertEquals(2, list.get(3));
+        assertEquals(1, list.get(4));
     }
 
     @Test

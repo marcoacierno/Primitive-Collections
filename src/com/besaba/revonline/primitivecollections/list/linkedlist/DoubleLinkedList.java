@@ -272,7 +272,7 @@ public class DoubleLinkedList implements DoubleIterable, Cloneable {
     }
 
     @Override
-    protected DoubleLinkedList clone() {
+    public DoubleLinkedList clone() {
         final DoubleLinkedList linkedList;
 
         try {

@@ -321,7 +321,7 @@ public class DoubleArrayList
     }
 
     @Override
-    protected DoubleArrayList clone() {
+    public DoubleArrayList clone() {
         DoubleArrayList clone;
 
         try {

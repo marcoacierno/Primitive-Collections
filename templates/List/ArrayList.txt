@@ -321,7 +321,7 @@ public class {{className}}
     }
 
     @Override
-    protected {{className}} clone() {
+    public {{className}} clone() {
         {{className}} clone;
 
         try {

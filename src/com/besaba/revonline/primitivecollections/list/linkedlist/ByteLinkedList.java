@@ -272,7 +272,7 @@ public class ByteLinkedList implements ByteIterable, Cloneable {
     }
 
     @Override
-    protected ByteLinkedList clone() {
+    public ByteLinkedList clone() {
         final ByteLinkedList linkedList;
 
         try {
