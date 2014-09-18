@@ -133,6 +133,12 @@ public class IntLinkedList implements IntIterable, Cloneable {
         }
     }
 
+    public void clear() {
+        header = new Node(0, null, null);
+        header.next = header.previous = header;
+        size = 0;
+    }
+
     private void addBefore(int value, Node before) {
         Node newNode = new Node(value, before, before.previous);
 
