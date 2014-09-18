@@ -35,7 +35,7 @@ public class IntStackLinkedList implements IntIterable {
         return linkedList.removeFirst();
     }
 
-    public int head() {
+    public int peek() {
         return linkedList.getFirst();
     }
 

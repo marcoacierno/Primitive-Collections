@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Queue;
 
 import static org.junit.Assert.*;
 
@@ -92,13 +91,13 @@ public class IntStackLinkedListTest {
         IntStackLinkedList stack = IntStackLinkedList.empty();
 
         stack.push(5);
-        assertEquals(5, stack.head());
+        assertEquals(5, stack.peek());
 
         stack.push(3);
-        assertEquals(3, stack.head());
+        assertEquals(3, stack.peek());
 
         stack.push(1);
-        assertEquals(1, stack.head());
+        assertEquals(1, stack.peek());
     }
 
     @Test
