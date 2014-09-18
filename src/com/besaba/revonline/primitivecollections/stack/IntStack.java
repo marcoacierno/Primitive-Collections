@@ -10,7 +10,7 @@ import com.besaba.revonline.primitivecollections.list.linkedlist.IntLinkedList;
  * @since 1.0
  */
 public class IntStack implements IntIterable, Cloneable {
-    private final IntLinkedList linkedList;
+    private IntLinkedList linkedList;
 
     private IntStack(IntLinkedList list) {
         this.linkedList = list;
@@ -67,8 +67,17 @@ public class IntStack implements IntIterable, Cloneable {
     }
 
     @Override
-    public IntStack clone() throws CloneNotSupportedException {
-        return new IntStack(linkedList.clone());
+    public IntStack clone() {
+        IntStack intStack;
+
+        try {
+            intStack = (IntStack) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+
+        intStack.linkedList = linkedList.clone();
+        return intStack;
     }
 
     @Override
