@@ -51,4 +51,9 @@ public class IntStackLinkedList implements IntIterable {
     public IntIterator iterator() {
         return linkedList.iterator();
     }
+
+    @Override
+    public String toString() {
+        return linkedList.toString();
+    }
 }
