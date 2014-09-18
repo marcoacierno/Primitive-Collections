@@ -131,4 +131,27 @@ public class IntStackLinkedListTest {
 
         assertNotEquals(stack, stack2);
     }
+
+    @Test
+    public void testPeek() throws Exception {
+
+    }
+
+    @Test
+    public void testAsArray() throws Exception {
+
+    }
+
+    @Test
+    public void testToString() throws Exception {
+
+    }
+
+    @Test
+    public void testEquals() throws Exception {
+        assertEquals(
+                IntStackLinkedList.with(1, 2, 3, 4, 5, 6),
+                IntStackLinkedList.with(1, 2, 3, 4, 5, 6)
+        );
+    }
 }

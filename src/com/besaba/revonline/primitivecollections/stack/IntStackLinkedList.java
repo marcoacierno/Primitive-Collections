@@ -47,6 +47,10 @@ public class IntStackLinkedList implements IntIterable, Cloneable {
         return linkedList.isEmpty();
     }
 
+    public int[] asArray() {
+        return linkedList.asArray();
+    }
+
     @Override
     public IntIterator iterator() {
         return linkedList.iterator();
@@ -60,5 +64,23 @@ public class IntStackLinkedList implements IntIterable, Cloneable {
     @Override
     public IntStackLinkedList clone() throws CloneNotSupportedException {
         return new IntStackLinkedList(linkedList.clone());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+
+        if (obj instanceof IntStackLinkedList) {
+            IntStackLinkedList objList = (IntStackLinkedList) obj;
+            return objList.linkedList.equals(this.linkedList);
+        }
+
+        return false;
     }
 }
