@@ -9,11 +9,11 @@ import java.util.LinkedList;
 
 import static org.junit.Assert.*;
 
-public class IntStackLinkedListTest {
+public class IntStackTest {
 
     @Test
     public void testWith() throws Exception {
-        IntStackLinkedList stack = IntStackLinkedList.empty();
+        IntStack stack = IntStack.empty();
         Deque<Integer> jdkStack = new LinkedList<Integer>();
 
         stack.push(1);
@@ -37,7 +37,7 @@ public class IntStackLinkedListTest {
 
     @Test
     public void testEmpty() throws Exception {
-        IntStackLinkedList stack = IntStackLinkedList.empty();
+        IntStack stack = IntStack.empty();
         Deque<Integer> jdkStack = new LinkedList<Integer>();
 
         stack.push(1);
@@ -64,7 +64,7 @@ public class IntStackLinkedListTest {
 
     @Test
     public void testPush() throws Exception {
-        IntStackLinkedList stack = IntStackLinkedList.empty();
+        IntStack stack = IntStack.empty();
 
         stack.push(1);
         stack.push(5);
@@ -90,7 +90,7 @@ public class IntStackLinkedListTest {
 
     @Test
     public void testHead() throws Exception {
-        IntStackLinkedList stack = IntStackLinkedList.empty();
+        IntStack stack = IntStack.empty();
 
         stack.push(5);
         assertEquals(5, stack.peek());
@@ -119,8 +119,8 @@ public class IntStackLinkedListTest {
 
     @Test
     public void testClone() throws Exception {
-        IntStackLinkedList stack = IntStackLinkedList.empty();
-        IntStackLinkedList stack2 = stack.clone();
+        IntStack stack = IntStack.empty();
+        IntStack stack2 = stack.clone();
 
         stack.push(5);
         assertEquals(5, stack.peek());
@@ -152,8 +152,8 @@ public class IntStackLinkedListTest {
     @Test
     public void testEquals() throws Exception {
         assertEquals(
-                IntStackLinkedList.with(1, 2, 3, 4, 5, 6),
-                IntStackLinkedList.with(1, 2, 3, 4, 5, 6)
+                IntStack.with(1, 2, 3, 4, 5, 6),
+                IntStack.with(1, 2, 3, 4, 5, 6)
         );
     }
 

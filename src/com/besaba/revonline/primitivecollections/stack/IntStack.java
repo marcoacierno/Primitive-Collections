@@ -9,23 +9,23 @@ import com.besaba.revonline.primitivecollections.list.linkedlist.IntLinkedList;
  * @author Marco
  * @since 1.0
  */
-public class IntStackLinkedList implements IntIterable, Cloneable {
+public class IntStack implements IntIterable, Cloneable {
     private final IntLinkedList linkedList;
 
-    private IntStackLinkedList(IntLinkedList list) {
+    private IntStack(IntLinkedList list) {
         this.linkedList = list;
     }
 
-    private IntStackLinkedList() {
+    private IntStack() {
         linkedList = IntLinkedList.empty();
     }
 
-    public static IntStackLinkedList with(int... values) {
-        return new IntStackLinkedList(IntLinkedList.with(values));
+    public static IntStack with(int... values) {
+        return new IntStack(IntLinkedList.with(values));
     }
 
-    public static IntStackLinkedList empty() {
-        return new IntStackLinkedList();
+    public static IntStack empty() {
+        return new IntStack();
     }
 
     public void push(int value) {
@@ -67,8 +67,8 @@ public class IntStackLinkedList implements IntIterable, Cloneable {
     }
 
     @Override
-    public IntStackLinkedList clone() throws CloneNotSupportedException {
-        return new IntStackLinkedList(linkedList.clone());
+    public IntStack clone() throws CloneNotSupportedException {
+        return new IntStack(linkedList.clone());
     }
 
     @Override
@@ -81,8 +81,8 @@ public class IntStackLinkedList implements IntIterable, Cloneable {
             return false;
         }
 
-        if (obj instanceof IntStackLinkedList) {
-            IntStackLinkedList objList = (IntStackLinkedList) obj;
+        if (obj instanceof IntStack) {
+            IntStack objList = (IntStack) obj;
             return objList.linkedList.equals(this.linkedList);
         }
 
