@@ -129,5 +129,6 @@ public class IntStackLinkedListTest {
         stack.push(1);
         assertEquals(1, stack.peek());
 
+        assertNotEquals(stack, stack2);
     }
 }
