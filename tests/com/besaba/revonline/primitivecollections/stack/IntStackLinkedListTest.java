@@ -1,5 +1,7 @@
 package com.besaba.revonline.primitivecollections.stack;
 
+import com.besaba.revonline.primitivecollections.function.IntConsumer;
+import com.besaba.revonline.primitivecollections.list.linkedlist.IntLinkedList;
 import org.junit.Test;
 
 import java.util.Deque;
@@ -153,5 +155,20 @@ public class IntStackLinkedListTest {
                 IntStackLinkedList.with(1, 2, 3, 4, 5, 6),
                 IntStackLinkedList.with(1, 2, 3, 4, 5, 6)
         );
+    }
+
+    @Test
+    public void testForEach() throws Exception {
+        IntLinkedList list = IntLinkedList.with(1, 101, 1010, 101010, 1010101010, 1010101);
+        final int[] values = new int[] {1, 101, 1010, 101010, 1010101010, 1010101};
+
+        list.forEach(new IntConsumer() {
+            int p = 0;
+
+            @Override
+            public void accept(int value) {
+                assertEquals(values[p++], value);
+            }
+        });
     }
 }

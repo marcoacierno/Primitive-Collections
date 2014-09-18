@@ -1,5 +1,6 @@
 package com.besaba.revonline.primitivecollections.stack;
 
+import com.besaba.revonline.primitivecollections.function.IntConsumer;
 import com.besaba.revonline.primitivecollections.iterables.IntIterable;
 import com.besaba.revonline.primitivecollections.iterables.iterators.IntIterator;
 import com.besaba.revonline.primitivecollections.list.linkedlist.IntLinkedList;
@@ -49,6 +50,10 @@ public class IntStackLinkedList implements IntIterable, Cloneable {
 
     public int[] asArray() {
         return linkedList.asArray();
+    }
+
+    public void forEach(IntConsumer consumer) {
+        linkedList.forEach(consumer);
     }
 
     @Override
