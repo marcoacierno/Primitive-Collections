@@ -8,7 +8,7 @@ import com.besaba.revonline.primitivecollections.list.linkedlist.IntLinkedList;
  * @author Marco
  * @since 1.0
  */
-public class IntStackLinkedList implements IntIterable {
+public class IntStackLinkedList implements IntIterable, Cloneable {
     private final IntLinkedList linkedList;
 
     private IntStackLinkedList(IntLinkedList list) {
@@ -55,5 +55,10 @@ public class IntStackLinkedList implements IntIterable {
     @Override
     public String toString() {
         return linkedList.toString();
+    }
+
+    @Override
+    public IntStackLinkedList clone() throws CloneNotSupportedException {
+        return new IntStackLinkedList(linkedList.clone());
     }
 }

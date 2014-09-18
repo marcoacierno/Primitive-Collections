@@ -114,4 +114,20 @@ public class IntStackLinkedListTest {
     public void testIterator() throws Exception {
 
     }
+
+    @Test
+    public void testClone() throws Exception {
+        IntStackLinkedList stack = IntStackLinkedList.empty();
+        IntStackLinkedList stack2 = stack.clone();
+
+        stack.push(5);
+        assertEquals(5, stack.peek());
+
+        stack.push(3);
+        assertEquals(3, stack.peek());
+
+        stack.push(1);
+        assertEquals(1, stack.peek());
+
+    }
 }
