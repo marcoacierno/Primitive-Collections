@@ -321,7 +321,7 @@ public class FloatArrayList
     }
 
     @Override
-    protected FloatArrayList clone() {
+    public FloatArrayList clone() {
         FloatArrayList clone;
 
         try {

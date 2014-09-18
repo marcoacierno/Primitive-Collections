@@ -272,7 +272,7 @@ public class BooleanLinkedList implements BooleanIterable, Cloneable {
     }
 
     @Override
-    protected BooleanLinkedList clone() {
+    public BooleanLinkedList clone() {
         final BooleanLinkedList linkedList;
 
         try {

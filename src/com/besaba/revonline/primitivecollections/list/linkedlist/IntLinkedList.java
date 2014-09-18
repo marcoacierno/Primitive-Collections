@@ -276,7 +276,7 @@ public class IntLinkedList implements IntIterable, Cloneable {
     }
 
     @Override
-    protected IntLinkedList clone() {
+    public IntLinkedList clone() {
         final IntLinkedList linkedList;
 
         try {

@@ -321,7 +321,7 @@ public class BooleanArrayList
     }
 
     @Override
-    protected BooleanArrayList clone() {
+    public BooleanArrayList clone() {
         BooleanArrayList clone;
 
         try {

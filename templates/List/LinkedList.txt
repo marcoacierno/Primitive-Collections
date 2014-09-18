@@ -272,7 +272,7 @@ public class {{className}} implements {{iterable}}, Cloneable {
     }
 
     @Override
-    protected {{className}} clone() {
+    public {{className}} clone() {
         final {{className}} linkedList;
 
         try {

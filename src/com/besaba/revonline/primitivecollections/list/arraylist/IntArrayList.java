@@ -320,7 +320,7 @@ public class IntArrayList
     }
 
     @Override
-    protected IntArrayList clone() {
+    public IntArrayList clone() {
         IntArrayList clone;
 
         try {

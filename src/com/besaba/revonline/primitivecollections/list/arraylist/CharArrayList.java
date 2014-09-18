@@ -321,7 +321,7 @@ public class CharArrayList
     }
 
     @Override
-    protected CharArrayList clone() {
+    public CharArrayList clone() {
         CharArrayList clone;
 
         try {

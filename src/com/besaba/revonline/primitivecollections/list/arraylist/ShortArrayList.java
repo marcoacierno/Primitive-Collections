@@ -321,7 +321,7 @@ public class ShortArrayList
     }
 
     @Override
-    protected ShortArrayList clone() {
+    public ShortArrayList clone() {
         ShortArrayList clone;
 
         try {

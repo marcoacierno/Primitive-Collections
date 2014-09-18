@@ -272,7 +272,7 @@ public class ShortLinkedList implements ShortIterable, Cloneable {
     }
 
     @Override
-    protected ShortLinkedList clone() {
+    public ShortLinkedList clone() {
         final ShortLinkedList linkedList;
 
         try {

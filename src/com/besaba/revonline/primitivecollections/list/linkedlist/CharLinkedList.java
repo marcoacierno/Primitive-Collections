@@ -272,7 +272,7 @@ public class CharLinkedList implements CharIterable, Cloneable {
     }
 
     @Override
-    protected CharLinkedList clone() {
+    public CharLinkedList clone() {
         final CharLinkedList linkedList;
 
         try {
