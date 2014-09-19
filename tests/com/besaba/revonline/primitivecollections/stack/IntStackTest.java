@@ -85,7 +85,21 @@ public class IntStackTest {
 
     @Test
     public void testPop() throws Exception {
+        IntStack stack = IntStack.with(1, 50, 505, 1010, 2020, 3030, 4040, 5050);
 
+        stack.push(32);
+        stack.push(31);
+        stack.push(65);
+        stack.push(1478);
+        stack.push(1567);
+        stack.push(11234);
+        stack.push(1125);
+
+        assertEquals(1125, stack.pop());
+        assertEquals(11234, stack.pop());
+        assertEquals(1567, stack.pop());
+
+        assertFalse(stack.isEmpty());
     }
 
     @Test
@@ -136,7 +150,15 @@ public class IntStackTest {
 
     @Test
     public void testPeek() throws Exception {
+        IntStack stack = IntStack.empty();
 
+        for (int i = 0; i < 25; ++i) {
+            stack.push(i);
+        }
+
+        assertEquals(24, stack.peek());
+        assertEquals(24, stack.pop());
+        assertEquals(23, stack.peek());
     }
 
     @Test
