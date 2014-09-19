@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 import static org.junit.Assert.*;
 
@@ -114,6 +115,12 @@ public class IntStackTest {
 
         stack.push(1);
         assertEquals(1, stack.peek());
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void testPeakWithAnEmptyStack() throws Exception {
+        IntStack stack = IntStack.empty();
+        stack.peek();
     }
 
     @Test
