@@ -146,6 +146,21 @@ public class ShortLinkedList implements ShortIterable, Cloneable {
         return size;
     }
 
+    public void clear() {
+        for (Node node = header; node != null; ) {
+            Node next = node.next;
+
+            node.next = null;
+            node.previous = null;
+
+            node = next;
+        }
+
+        header = new Node((short)0, null, null);
+        header.next = header.previous = header;
+        size = 0;
+    }
+
     private short remove(Node node) {
         if (node == header) {
             throw new NoSuchElementException();

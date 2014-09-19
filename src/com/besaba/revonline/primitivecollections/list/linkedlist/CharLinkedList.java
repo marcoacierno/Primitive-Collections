@@ -146,6 +146,21 @@ public class CharLinkedList implements CharIterable, Cloneable {
         return size;
     }
 
+    public void clear() {
+        for (Node node = header; node != null; ) {
+            Node next = node.next;
+
+            node.next = null;
+            node.previous = null;
+
+            node = next;
+        }
+
+        header = new Node((char)'\u0000', null, null);
+        header.next = header.previous = header;
+        size = 0;
+    }
+
     private char remove(Node node) {
         if (node == header) {
             throw new NoSuchElementException();

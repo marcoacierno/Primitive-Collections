@@ -146,6 +146,21 @@ public class DoubleLinkedList implements DoubleIterable, Cloneable {
         return size;
     }
 
+    public void clear() {
+        for (Node node = header; node != null; ) {
+            Node next = node.next;
+
+            node.next = null;
+            node.previous = null;
+
+            node = next;
+        }
+
+        header = new Node((double)0.0d, null, null);
+        header.next = header.previous = header;
+        size = 0;
+    }
+
     private double remove(Node node) {
         if (node == header) {
             throw new NoSuchElementException();

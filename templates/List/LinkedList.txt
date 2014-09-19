@@ -146,6 +146,21 @@ public class {{className}} implements {{iterable}}, Cloneable {
         return size;
     }
 
+    public void clear() {
+        for (Node node = header; node != null; ) {
+            Node next = node.next;
+
+            node.next = null;
+            node.previous = null;
+
+            node = next;
+        }
+
+        header = new Node(({{type}}){{default}}, null, null);
+        header.next = header.previous = header;
+        size = 0;
+    }
+
     private {{type}} remove(Node node) {
         if (node == header) {
             throw new NoSuchElementException();
