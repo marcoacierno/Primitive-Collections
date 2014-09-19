@@ -292,7 +292,7 @@ public class IntLinkedListTest {
         IntLinkedList list = IntLinkedList.empty();
         list.addFirst(3);
 
-        assertArrayEquals(new int[] {3}, list.asArray());
+        assertArrayEquals(new int[]{3}, list.asArray());
     }
 
     @Test
@@ -318,4 +318,24 @@ public class IntLinkedListTest {
     }
 
 
+    @Test
+    public void testClear() throws Exception {
+        IntLinkedList list = IntLinkedList.empty();
+        list.add(5);
+        list.add(3);
+        list.add(2);
+        list.add(1);
+        list.add(0);
+
+        list.clear();
+
+        assertTrue(list.isEmpty());
+
+        list.forEach(new IntConsumer() {
+            @Override
+            public void accept(int value) {
+                assertTrue("Code should never join here", true);
+            }
+        });
+    }
 }
