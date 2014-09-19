@@ -44,6 +44,10 @@ public class IntStack implements IntIterable, Cloneable {
         return linkedList.size();
     }
 
+    public void clear() {
+        linkedList.clear();
+    }
+
     public boolean isEmpty() {
         return linkedList.isEmpty();
     }
