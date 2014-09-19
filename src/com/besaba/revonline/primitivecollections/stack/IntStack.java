@@ -24,6 +24,10 @@ public class IntStack implements IntIterable, Cloneable {
         return new IntStack(IntLinkedList.with(values));
     }
 
+    public static IntStack from(IntStack stack) {
+        return stack.clone();
+    }
+
     public static IntStack empty() {
         return new IntStack();
     }
