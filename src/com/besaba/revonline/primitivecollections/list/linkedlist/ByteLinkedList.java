@@ -146,6 +146,10 @@ public class ByteLinkedList implements ByteIterable, Cloneable {
         return size;
     }
 
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
     public void clear() {
         for (Node node = header; node != null; ) {
             Node next = node.next;
