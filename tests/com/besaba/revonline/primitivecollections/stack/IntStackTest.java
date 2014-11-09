@@ -59,8 +59,7 @@ public class IntStackTest {
         assertEquals(stack.pop(), (int)jdkStack.poll());
         assertEquals(stack.pop(), (int)jdkStack.poll());
 
-        assertTrue(stack.isEmpty());
-        assertTrue(jdkStack.isEmpty());
+        assertEquals(stack.isEmpty(), jdkStack.isEmpty());
     }
 
     @Test
