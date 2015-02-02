@@ -6,7 +6,7 @@ Just compile the source and you are ready.
 
 * This project is born to avoid boxing and autoboxing when using collections in Java.
 * 1.1
-* [Please report any bug here](https://bitbucket.org/rrev/primitivecollections/issues?status=new&status=open)
+* Check test folder for examples (i'm moving the project from bitbucket so...)
 
 ### Important ###
 
