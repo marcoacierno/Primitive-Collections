@@ -4,36 +4,47 @@ import com.besaba.revonline.primitivecollections.function.{{consumer}};
 import com.besaba.revonline.primitivecollections.iterables.{{iterable}};
 import com.besaba.revonline.primitivecollections.iterables.iterators.{{iterator}};
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.RandomAccess;
 
 /**
- * A List
+ * A List of integers.
+ *
+ * When serialized it will:
+ *
+ *  - Serialize number of {{type}} (size -- n)
+ *  - Send n {{type}}
  *
  * @author Marco
  * @since 1.0
  */
 public class {{className}}
-        implements {{iterable}}, RandomAccess, Cloneable {
+        implements {{iterable}}, RandomAccess, Cloneable, Serializable {
+    private final static long serialVersionUID = 1L;
+
     private transient {{type}}[] elementsData;
-    private int size;
+    private transient int size;
 
     /**
-     * Creates an ArrayListInt with the provided capacity.
+     * Creates an {{className}} with the provided capacity.
      *
      * @param capacity The start capacity
-     * @return The created ArrayListInt
+     * @return The created {{className}}
      */
     public static {{className}} withCapacity(int capacity) {
         return new {{className}}(capacity);
     }
 
     /**
-     * Creates an ArrayListInt taking the values from another ArrayListInt
+     * Creates an {{className}} taking the values from another ArrayListInt
      *
      * @param fromList The original list
-     * @return The ArrayListInt which contains {@see fromList} values
+     * @return The {{className}} which contains {@see fromList} values
      */
     public static {{className}} from({{className}} fromList) {
         {{className}} toList = new {{className}}(0);
@@ -43,14 +54,13 @@ public class {{className}}
         return toList;
     }
 
-
     /**
-     * Creates an  with the values provided as argument
+     * Creates an {{className}} with the values provided as argument
      *
      * @param number The list need at least one value to be created,
      *               {@see empty()} to create an empty list.
      * @param numbers Other values to insert
-     * @return An IntArrayList with the values provided as arguments
+     * @return An {{className}} with the values provided as arguments
      */
     public static {{className}} with({{type}} number, {{type}}... numbers) {
         {{className}} toList = new {{className}}(0);
@@ -80,9 +90,9 @@ public class {{className}}
     }
 
     /**
-     * Adds at the end of the list.
+     * Adds an {{type}} at the end of the list.
      *
-     * @param value The int to add
+     * @param value The {{type}} to add
      */
     public void add({{type}} value) {
         ensureCapacity(size + 1);
@@ -91,7 +101,7 @@ public class {{className}}
     }
 
     /**
-     * Adds in the position provided in the {@see index}.
+     * Adds an integer in the position provided in the {@see index}.
      *
      * @param index The position
      * @param value The int to add
@@ -332,5 +342,31 @@ public class {{className}}
 
         clone.elementsData = elementsData.clone();
         return clone;
+    }
+
+    private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+
+        final int size = in.readInt();
+        this.elementsData = new {{type}}[size];
+
+        for (int i = 0; i < size; i++) {
+            add(in.read{{upperCaseType}}());
+        }
+    }
+
+    /**
+     * Serialize this instance.
+     *
+     * @serialData The size of the List (number of ints it contains - ) is emitted as int, followed
+     * by all of it's elements (n integers) in their correct order.
+     */
+    private void writeObject(final ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+
+        out.writeInt(size);
+        for (final {{type}} i : elementsData) {
+            out.write{{upperCaseType}}(i);
+        }
     }
 }
