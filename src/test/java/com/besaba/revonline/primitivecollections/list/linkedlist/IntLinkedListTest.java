@@ -4,6 +4,10 @@ import com.besaba.revonline.primitivecollections.function.IntConsumer;
 import com.besaba.revonline.primitivecollections.iterables.iterators.IntIterator;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
@@ -334,8 +338,44 @@ public class IntLinkedListTest {
         list.forEach(new IntConsumer() {
             @Override
             public void accept(int value) {
-                assertTrue("Code should never join here", true);
+                assertTrue("Code should never enter here", true);
             }
         });
     }
+
+    @Test
+    public void testSerializerAndRestore() throws Exception {
+        IntLinkedList originalList = IntLinkedList.with(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+        objectOutputStream.writeObject(originalList);
+
+        byte[] bytes = byteArrayOutputStream.toByteArray();
+
+        ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(bytes));
+        IntLinkedList deserializedList = (IntLinkedList) objectInputStream.readObject();
+
+        assertEquals(originalList, deserializedList);
+    }
+
+    @Test
+    public void testSerializerAndRestoreWithEmptyList() throws Exception {
+        IntLinkedList originalList = IntLinkedList.with();
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+        objectOutputStream.writeObject(originalList);
+
+        byte[] bytes = byteArrayOutputStream.toByteArray();
+
+        ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(bytes));
+        IntLinkedList deserializedList = (IntLinkedList) objectInputStream.readObject();
+
+        deserializedList.add(1);
+
+        assertNotEquals(originalList, deserializedList);
+    }
+
+
 }
