@@ -5,6 +5,7 @@ import com.besaba.revonline.primitivecollections.iterables.iterators.IntIterator
 import com.besaba.revonline.primitivecollections.list.arraylist.IntArrayList;
 import org.junit.Test;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -395,10 +396,6 @@ public class IntArrayListTest {
         assertTrue(list.contains(101));
     }
 
-    // ============================================================================================================== //
-    // =============================== ArrayList<Integer> IntArrayList tests ======================================== //
-    // ============================================================================================================== //
-
     @Test
     public void vsTestClear() throws Exception {
         IntArrayList intArrayList = IntArrayList.with(1, 5, 6, 7, 10, 101, 1010, 10101);
@@ -458,5 +455,59 @@ public class IntArrayListTest {
         assertEquals(intArrayList.contains(606), arrayList.contains(606));
         assertNotEquals(intArrayList.contains(303), arrayList.contains(303));
         assertNotEquals(intArrayList.contains(10), arrayList.contains(10));
+    }
+
+    @Test
+    public void testSerializeAndRestore() throws Exception {
+        IntArrayList originalList = IntArrayList.with(5, 10, 20, 30, 50, 60, 70, 80, 100);
+
+        ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteOutput);
+        objectOutputStream.writeObject(originalList);
+
+        byte[] bytes = byteOutput.toByteArray();
+
+        ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(bytes));
+
+        IntArrayList deserializedList = (IntArrayList) objectInputStream.readObject();
+
+        assertEquals(originalList, deserializedList);
+    }
+
+    @Test
+    public void testSerializeAndRestoreEmptyList() throws Exception {
+        IntArrayList originalList = IntArrayList.empty();
+
+        ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteOutput);
+        objectOutputStream.writeObject(originalList);
+
+        byte[] bytes = byteOutput.toByteArray();
+
+        ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(bytes));
+
+        IntArrayList deserializedList = (IntArrayList) objectInputStream.readObject();
+
+        assertEquals(originalList, deserializedList);
+    }
+
+    @Test
+    public void testSerializeAndRestoreThenAddTwoElements() throws Exception {
+        IntArrayList originalList = IntArrayList.with(1, 1, 1, 1);
+
+        ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteOutput);
+        objectOutputStream.writeObject(originalList);
+
+        byte[] bytes = byteOutput.toByteArray();
+
+        ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(bytes));
+
+        IntArrayList deserializedList = (IntArrayList) objectInputStream.readObject();
+
+        deserializedList.add(22);
+        deserializedList.add(23);
+
+        assertNotEquals(originalList, deserializedList);
     }
 }

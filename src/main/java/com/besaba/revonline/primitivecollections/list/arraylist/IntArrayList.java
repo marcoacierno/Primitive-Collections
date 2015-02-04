@@ -4,20 +4,31 @@ import com.besaba.revonline.primitivecollections.function.IntConsumer;
 import com.besaba.revonline.primitivecollections.iterables.IntIterable;
 import com.besaba.revonline.primitivecollections.iterables.iterators.IntIterator;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.RandomAccess;
 
 /**
- * A List of integers
+ * A List of integers.
+ *
+ * When serialized it will:
+ *
+ *  - Serialize number of ints (n)
+ *  - Send n integers
  *
  * @author Marco
  * @since 1.0
  */
 public class IntArrayList
-        implements IntIterable, RandomAccess, Cloneable {
+        implements IntIterable, RandomAccess, Cloneable, Serializable {
+    private final static long serialVersionUID = 1L;
+
     private transient int[] elementsData;
-    private int size;
+    private transient int size;
 
     /**
      * Creates an ArrayListInt with the provided capacity.
@@ -331,5 +342,31 @@ public class IntArrayList
 
         clone.elementsData = elementsData.clone();
         return clone;
+    }
+
+    private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+
+        final int size = in.readInt();
+        this.elementsData = new int[size];
+
+        for (int i = 0; i < size; i++) {
+            add(in.readInt());
+        }
+    }
+
+    /**
+     * Serialize this instance.
+     *
+     * @serialData The size of the List (number of ints it contains - ) is emitted as int, followed
+     * by all of it's elements (n integers) in their correct order.
+     */
+    private void writeObject(final ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+
+        out.writeInt(size);
+        for (final int i : elementsData) {
+            out.writeInt(i);
+        }
     }
 }
