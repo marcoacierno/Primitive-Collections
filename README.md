@@ -1,5 +1,7 @@
 # README #
 
+[![Build][buildimage]](https://travis-ci.org/rrev/Primitive-Collections)
+
 Just compile the source and you are ready.
 
 ### General ###
@@ -19,3 +21,5 @@ So:
 
 Create a default type (example ArrayList), implement it for a specific type, then write the generic template and use the converter to create the version for the other primitives
 Javadoc will be online [here](http://revonline.comuf.com/javadoc/primitivecollections/1/)
+
+[buildimage]: https://travis-ci.org/rrev/Primitive-Collections.svg?branch=master 
