@@ -5,17 +5,26 @@ import com.besaba.revonline.primitivecollections.internal.Utils;
 import com.besaba.revonline.primitivecollections.iterables.{{iterable}};
 import com.besaba.revonline.primitivecollections.iterables.iterators.{{iterator}};
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.NoSuchElementException;
 
 /**
  * @author Marco
  * @since 1.0
  */
-public class {{className}} implements {{iterable}}, Cloneable {
-    private transient Node header = new Node(({{type}}){{default}}, null, null);
+public class {{className}} implements {{iterable}}, Cloneable, Serializable {
+    private transient Node header;
     private transient int size;
 
     private {{className}}() {
+        prepareLinkedList();
+    }
+
+    private void prepareLinkedList() {
+        header = new Node(({{type}}){{default}}, null, null);
         header.next = header.previous = header;
     }
 
@@ -133,23 +142,6 @@ public class {{className}} implements {{iterable}}, Cloneable {
         }
     }
 
-    private void addBefore({{type}} value, Node before) {
-        Node newNode = new Node(value, before, before.previous);
-
-        newNode.previous.next = newNode;
-        newNode.next.previous = newNode;
-
-        size++;
-    }
-
-    public int size() {
-        return size;
-    }
-
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
     public void clear() {
         for (Node node = header; node != null; ) {
             Node next = node.next;
@@ -160,9 +152,25 @@ public class {{className}} implements {{iterable}}, Cloneable {
             node = next;
         }
 
-        header = new Node(({{type}}){{default}}, null, null);
-        header.next = header.previous = header;
+        prepareLinkedList();
         size = 0;
+    }
+
+    private void addBefore({{type}} value, Node before) {
+        Node newNode = new Node(value, before, before.previous);
+
+        newNode.previous.next = newNode;
+        newNode.next.previous = newNode;
+
+        size++;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public int size() {
+        return size;
     }
 
     private {{type}} remove(Node node) {
@@ -300,8 +308,7 @@ public class {{className}} implements {{iterable}}, Cloneable {
             throw new AssertionError();
         }
 
-        linkedList.header = new Node(({{type}}){{default}}, null, null);
-        linkedList.header.next = linkedList.header.previous = linkedList.header;
+        linkedList.prepareLinkedList();
         linkedList.size = 0;
 
         forEach(new {{consumer}}() {
@@ -312,5 +319,26 @@ public class {{className}} implements {{iterable}}, Cloneable {
         });
 
         return linkedList;
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+
+        int size = in.readInt();
+        prepareLinkedList();
+
+        for (int i = 0; i < size; i++) {
+            add(in.read{{upperCaseType}}());
+        }
+    }
+
+    private void writeObject(final ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+
+        out.writeInt(size);
+
+        for (Node node = header.next; node != header; node = node.next) {
+            out.write{{upperCaseType}}(node.value);
+        }
     }
 }

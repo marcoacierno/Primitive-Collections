@@ -5,17 +5,26 @@ import com.besaba.revonline.primitivecollections.internal.Utils;
 import com.besaba.revonline.primitivecollections.iterables.IntIterable;
 import com.besaba.revonline.primitivecollections.iterables.iterators.IntIterator;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.NoSuchElementException;
 
 /**
  * @author Marco
  * @since 1.0
  */
-public class IntLinkedList implements IntIterable, Cloneable {
-    private transient Node header = new Node(0, null, null);
+public class IntLinkedList implements IntIterable, Cloneable, Serializable {
+    private transient Node header;
     private transient int size;
 
     private IntLinkedList() {
+        prepareLinkedList();
+    }
+
+    private void prepareLinkedList() {
+        header = new Node(0, null, null);
         header.next = header.previous = header;
     }
 
@@ -143,8 +152,7 @@ public class IntLinkedList implements IntIterable, Cloneable {
             node = next;
         }
 
-        header = new Node(0, null, null);
-        header.next = header.previous = header;
+        prepareLinkedList();
         size = 0;
     }
 
@@ -300,8 +308,7 @@ public class IntLinkedList implements IntIterable, Cloneable {
             throw new AssertionError();
         }
 
-        linkedList.header = new Node(0, null, null);
-        linkedList.header.next = linkedList.header.previous = linkedList.header;
+        linkedList.prepareLinkedList();
         linkedList.size = 0;
 
         forEach(new IntConsumer() {
@@ -312,5 +319,26 @@ public class IntLinkedList implements IntIterable, Cloneable {
         });
 
         return linkedList;
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+
+        int size = in.readInt();
+        prepareLinkedList();
+
+        for (int i = 0; i < size; i++) {
+            add(in.readInt());
+        }
+    }
+
+    private void writeObject(final ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+
+        out.writeInt(size);
+
+        for (Node node = header.next; node != header; node = node.next) {
+            out.writeInt(node.value);
+        }
     }
 }

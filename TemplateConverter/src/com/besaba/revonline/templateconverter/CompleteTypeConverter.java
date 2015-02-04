@@ -4,6 +4,7 @@ import com.besaba.revonline.templateconverter.internal.Template;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -19,26 +20,27 @@ import java.util.Map;
 public class CompleteTypeConverter {
     public static void main(String[] args) throws IOException {
         // put it to true if you don't want to generate the files
-        final boolean fakeWrite = true;
+        final boolean fakeWrite = false;
 
         // hello you
         // change the values with your values
         // the tool will convert the template for all primitive types
-        final String templatesPosition = System.getProperty("user.dir") +"\\templates";
+        final String templatesPosition = System.getProperty("user.dir") + File.separator + "templates";
         final String folder = "List";
-        final String fileName = "ArrayList";
+        final String fileName = "LinkedList"; // update here the template name
+        final String packageNameType = "linkedlist"; // update here the package name
         final String iteratorsFolder = "Iterators";
         final String consumerFolder = "Consumer";
         // sources directories
         // yes, you can use relative paths yaaaay!
         final String
-                sourceClassDir = System.getProperty("user.dir") +"\\src\\com\\besaba\\revonline\\primitivecollections\\list\\arraylist";
+                sourceClassDir = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "com" + File.separator + "besaba" + File.separator + "revonline" + File.separator + "primitivecollections" + File.separator + "list" + File.separator + packageNameType;
         final String
-                sourceClassIterable = System.getProperty("user.dir") +"\\src\\com\\besaba\\revonline\\primitivecollections\\iterables";
+                sourceClassIterable = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "com" + File.separator + "besaba" + File.separator + "revonline" + File.separator + "primitivecollections" + File.separator + "iterables";
         final String
-                sourceClassIterator = System.getProperty("user.dir") +"\\src\\com\\besaba\\revonline\\primitivecollections\\iterables\\iterators";
+                sourceClassIterator = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "com" + File.separator + "besaba" + File.separator + "revonline" + File.separator + "primitivecollections" + File.separator + "iterables" + File.separator + "iterators";
         final String
-                sourceClassConsumer = System.getProperty("user.dir") +"\\src\\com\\besaba\\revonline\\primitivecollections\\function\\";
+                sourceClassConsumer = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "com" + File.separator + "besaba" + File.separator + "revonline" + File.separator + "primitivecollections" + File.separator + "function" + File.separator + "";
         // put it to true if you are recreating everything
         final boolean overrideIfExists = false; //oh and for now it doesn't work (lol it's not implemented yet)
         // types which will be used
