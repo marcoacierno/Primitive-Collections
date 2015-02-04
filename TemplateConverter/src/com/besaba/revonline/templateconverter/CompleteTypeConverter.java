@@ -27,13 +27,14 @@ public class CompleteTypeConverter {
         // the tool will convert the template for all primitive types
         final String templatesPosition = System.getProperty("user.dir") + File.separator + "templates";
         final String folder = "List";
-        final String fileName = "ArrayList";
+        final String fileName = "LinkedList"; // update here the template name
+        final String packageNameType = "linkedlist"; // update here the package name
         final String iteratorsFolder = "Iterators";
         final String consumerFolder = "Consumer";
         // sources directories
         // yes, you can use relative paths yaaaay!
         final String
-                sourceClassDir = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "com" + File.separator + "besaba" + File.separator + "revonline" + File.separator + "primitivecollections" + File.separator + "list" + File.separator + "arraylist";
+                sourceClassDir = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "com" + File.separator + "besaba" + File.separator + "revonline" + File.separator + "primitivecollections" + File.separator + "list" + File.separator + packageNameType;
         final String
                 sourceClassIterable = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "com" + File.separator + "besaba" + File.separator + "revonline" + File.separator + "primitivecollections" + File.separator + "iterables";
         final String
