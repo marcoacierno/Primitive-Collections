@@ -4,6 +4,11 @@ import com.besaba.revonline.primitivecollections.function.IntConsumer;
 import com.besaba.revonline.primitivecollections.list.linkedlist.IntLinkedList;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
@@ -187,7 +192,7 @@ public class IntStackTest {
 
     @Test
     public void testForEach() throws Exception {
-        IntLinkedList list = IntLinkedList.with(1, 101, 1010, 101010, 1010101010, 1010101);
+        IntStack list = IntStack.with(1, 101, 1010, 101010, 1010101010, 1010101);
         final int[] values = new int[] {1, 101, 1010, 101010, 1010101010, 1010101};
 
         list.forEach(new IntConsumer() {
@@ -198,5 +203,21 @@ public class IntStackTest {
                 assertEquals(values[p++], value);
             }
         });
+    }
+
+    @Test
+    public void testSerializableStack() throws Exception {
+        IntStack stack = IntStack.with(1, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95);
+        ByteArrayOutputStream byteArrayInputStream = new ByteArrayOutputStream();
+
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayInputStream);
+        objectOutputStream.writeObject(stack);
+
+        byte[] bytes = byteArrayInputStream.toByteArray();
+
+        ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(bytes));
+        IntStack deserializedStack = (IntStack) objectInputStream.readObject();
+
+        assertEquals(stack, deserializedStack);
     }
 }

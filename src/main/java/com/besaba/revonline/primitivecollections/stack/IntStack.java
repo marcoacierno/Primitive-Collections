@@ -5,11 +5,13 @@ import com.besaba.revonline.primitivecollections.iterables.IntIterable;
 import com.besaba.revonline.primitivecollections.iterables.iterators.IntIterator;
 import com.besaba.revonline.primitivecollections.list.linkedlist.IntLinkedList;
 
+import java.io.Serializable;
+
 /**
  * @author Marco
  * @since 1.0
  */
-public class IntStack implements IntIterable, Cloneable {
+public class IntStack implements IntIterable, Cloneable, Serializable {
     private IntLinkedList linkedList;
 
     private IntStack(IntLinkedList list) {
